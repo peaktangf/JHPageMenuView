@@ -18,6 +18,8 @@
 @property (nonatomic, assign) CGFloat menuHeight;
 /** 菜单个数 */
 @property (nonatomic, assign) NSInteger menuCount;
+/** 当前选中的菜单下标 */
+@property (nonatomic, assign) NSInteger selectIndex;
 
 @end
 
@@ -111,9 +113,16 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (collectionView.tag == JHMENU_COLLECTIONVIEW_TAG) {
-        return [self.dataSource menuView:self menuCellForItemAtIndexPath:indexPath];
+        JHPageMenuItem *item = [self.dataSource menuView:self menuCellForItemAtIndexPath:indexPath];
+        if (indexPath.row == self.selectIndex) {
+            [item setSelected:YES withAnimation:NO];
+        } else {
+            [item setSelected:NO withAnimation:NO];
+        }
+        return item;
     } else {
-        return [self.dataSource menuView:self decorateCellForItemAtIndexPath:indexPath];
+        JHPageMenuItem *item = [self.dataSource menuView:self decorateCellForItemAtIndexPath:indexPath];
+        return item;
     }
     return nil;
 }
@@ -121,20 +130,11 @@
 #pragma mark - UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    JHPageMenuItem *cell = [self.dataSource menuView:self menuCellForItemAtIndexPath:indexPath];
-    if (cell) {
-        // 禁用手势 (防止连续点击) 
-        self.menuCollectionView.userInteractionEnabled = NO;
-        [self refreshContentOffsetItemFrame:cell.frame];
-    }
-    if ([self.delegate respondsToSelector:@selector(menuView:didSelectIndexPath:)]) {
-        [self.delegate menuView:self didSelectIndexPath:indexPath];
-    }
+    [self selectItemAtIndex:indexPath.row];
 }
 
 #pragma makr - UIScrollViewDelegate
 
-// 当有滚动的时候就会调用
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     UICollectionView *collectionView = (UICollectionView *)scrollView;
     //同步两个collectionView的滚动
@@ -151,7 +151,31 @@
     return [self.dataSource numbersOfItemsInMenuView:self];
 }
 
-#pragma mark - private
+#pragma mark - Private
+
+- (void)willMoveToSuperview:(UIView *)newSuperview {
+    if (self.selectIndex == 0) {
+        return;
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // 当有设置初始菜单下标的时候，等待主队列空闲再执行该方法
+        [self selectItemAtIndex:self.selectIndex];
+    });
+}
+
+- (void)selectItemAtIndex:(NSInteger)index {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
+    JHPageMenuItem *item = [self.dataSource menuView:self menuCellForItemAtIndexPath:indexPath];
+    if (!item) {
+        return;
+    }
+    self.selectIndex = index;
+    [self.menuCollectionView reloadData];
+    if ([self.delegate respondsToSelector:@selector(menuView:didSelectIndexPath:)]) {
+        [self.delegate menuView:self didSelectIndexPath:indexPath];
+    }
+    [self refreshContentOffsetItemFrame:item.frame];
+}
 
 // 让选中的item位于中间
 - (void)refreshContentOffsetItemFrame:(CGRect)frame {

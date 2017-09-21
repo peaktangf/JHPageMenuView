@@ -83,4 +83,11 @@
  */
 @property (nonatomic, strong) UICollectionView *decorateCollectionView;
 
+/**
+ 设置选中的菜单
+
+ @param index 下标
+ */
+- (void)selectItemAtIndex:(NSInteger)index;
+
 @end

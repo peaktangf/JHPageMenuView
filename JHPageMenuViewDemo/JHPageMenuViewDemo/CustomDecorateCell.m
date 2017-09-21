@@ -8,10 +8,19 @@
 
 #import "CustomDecorateCell.h"
 
+@interface CustomDecorateCell ()
+@property (weak, nonatomic) IBOutlet UIView *bgView;
+
+@end
+
 @implementation CustomDecorateCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.bgView.backgroundColor = [UIColor clearColor];
+    self.bgView.layer.borderColor = [UIColor redColor].CGColor;
+    self.bgView.layer.borderWidth = 1.0;
+    self.bgView.layer.cornerRadius = 10;
 }
 
 @end

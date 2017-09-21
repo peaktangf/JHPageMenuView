@@ -25,7 +25,7 @@
 }
 
 - (void)setupData {
-    
+
 }
 
 - (void)setupView {
@@ -42,10 +42,12 @@
 - (JHPageMenuView *)menuView {
     if (!_menuView) {
         _menuView = [[JHPageMenuView alloc] init];
+        _menuView.backgroundColor = [UIColor groupTableViewBackgroundColor];
         [CustomMenuCell registerMenuItemNibCollectionView:_menuView.menuCollectionView];
         [CustomDecorateCell registerMenuItemNibCollectionView:_menuView.decorateCollectionView];
         _menuView.delegate = self;
         _menuView.dataSource = self;
+        [_menuView selectItemAtIndex:5];
     }
     return _menuView;
 }
@@ -69,7 +71,7 @@
 #pragma mark - JHMenuViewDelegate
 
 - (CGSize)menuView:(JHPageMenuView *)menuView sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(50, 50);
+    return CGSizeMake(80, 50);
 }
 
 - (void)didReceiveMemoryWarning {

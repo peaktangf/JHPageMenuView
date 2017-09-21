@@ -8,10 +8,24 @@
 
 #import "CustomMenuCell.h"
 
+@interface CustomMenuCell ()
+@property (weak, nonatomic) IBOutlet UILabel *lbTitle;
+@end
+
 @implementation CustomMenuCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+}
+
+- (void)menuItemNormalStyle {
+    self.lbTitle.text = @"未选中";
+    self.lbTitle.textColor = [UIColor grayColor];
+}
+
+- (void)menuItemSelectedStyle {
+    self.lbTitle.text = @"选中";
+    self.lbTitle.textColor = [UIColor redColor];
 }
 
 @end

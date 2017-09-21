@@ -18,4 +18,17 @@
     return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([self class]) forIndexPath:indexPath];
 }
 
+- (void)menuItemSelectedStyle {}
+
+- (void)menuItemNormalStyle {}
+
+- (void)setSelected:(BOOL)selected withAnimation:(BOOL)animation {
+    self.itemSelected = selected;
+    if (selected) {
+        [self menuItemSelectedStyle];
+    } else {
+        [self menuItemNormalStyle];
+    }
+}
+
 @end
