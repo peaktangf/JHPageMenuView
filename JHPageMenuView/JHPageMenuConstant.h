@@ -10,8 +10,6 @@
 #define JHPageMenuConstant_h
 
 #import <Masonry.h>
-static const NSInteger JHMENU_COLLECTIONVIEW_TAG        = 11;
-static const NSInteger JHDECORATE_COLLECTIONVIEW_TAG    = 22;
 
 typedef NS_ENUM(NSInteger, JHPageMenuItemStyle) {
     JHPageMenuItemStyleNormal,  // 正常样式
