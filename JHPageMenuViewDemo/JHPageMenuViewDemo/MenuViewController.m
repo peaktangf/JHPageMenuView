@@ -9,7 +9,6 @@
 #import "MenuViewController.h"
 #import "JHPageMenuView.h"
 #import "CustomMenuCell.h"
-#import "CustomDecorateCell.h"
 #import <Masonry.h>
 
 @interface MenuViewController ()<JHPageMenuViewDelegate, JHPageMenuViewDataSource>
@@ -44,7 +43,6 @@
         _menuView = [[JHPageMenuView alloc] init];
         _menuView.backgroundColor = [UIColor groupTableViewBackgroundColor];
         [CustomMenuCell registerMenuItemNibCollectionView:_menuView.menuCollectionView];
-        [CustomDecorateCell registerMenuItemNibCollectionView:_menuView.decorateCollectionView];
         _menuView.delegate = self;
         _menuView.dataSource = self;
         [_menuView selectItemAtIndex:5];
@@ -58,20 +56,19 @@
     return 10;
 }
 
-- (JHPageMenuItem *)menuView:(JHPageMenuView *)menuView menuCellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    CustomMenuCell *cell = [CustomMenuCell collectionView:menuView.menuCollectionView itemForIndexPath:indexPath];
-    return cell;
-}
- 
-- (JHPageMenuItem *)menuView:(JHPageMenuView *)menuView decorateCellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    CustomDecorateCell *cell = [CustomDecorateCell collectionView:menuView.decorateCollectionView itemForIndexPath:indexPath];
+- (JHPageMenuItem *)menuView:(JHPageMenuView *)menuView menuCellForItemAtIndex:(NSInteger)index {
+    CustomMenuCell *cell = [CustomMenuCell collectionView:menuView.menuCollectionView itemForIndex:index];
     return cell;
 }
 
 #pragma mark - JHMenuViewDelegate
 
-- (CGSize)menuView:(JHPageMenuView *)menuView sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+- (CGSize)menuView:(JHPageMenuView *)menuView sizeForItemAtIndex:(NSInteger)index {
     return CGSizeMake(80, 50);
+}
+
+- (void)menuView:(JHPageMenuView *)menuView didSelectIndex:(NSInteger)index {
+    NSLog(@"当前选中的菜单 = %ld",index);
 }
 
 - (void)didReceiveMemoryWarning {

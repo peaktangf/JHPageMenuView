@@ -23,23 +23,13 @@
 + (void)registerMenuItemNibCollectionView:(UICollectionView *)collectionView;
 
 /**
- 获取collectionView对应indexPath的collectionCell
+ 获取collectionView对应index的collectionCell
 
  @param collectionView collectionView
- @param indexPath indexPath
+ @param index index
  @return collectionCell
  */
-+ (instancetype)collectionView:(UICollectionView *)collectionView itemForIndexPath:(NSIndexPath *)indexPath;
-
-/**
- 告知菜单正常情况下的样式，自定义的菜单需要重写该方法
- */
-- (void)menuItemNormalStyle;
-
-/**
- 告知菜单选中时的样式，自定义的菜单需要重写该方法
- */
-- (void)menuItemSelectedStyle;
++ (instancetype)collectionView:(UICollectionView *)collectionView itemForIndex:(NSInteger)index;
 
 /**
  设置菜单是否选中

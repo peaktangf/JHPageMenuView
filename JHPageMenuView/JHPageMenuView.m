@@ -51,10 +51,6 @@
 }
 
 - (void)initialization {
-    [self addSubview:self.decorateCollectionView];
-    [self.decorateCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.leading.trailing.bottom.equalTo(self);
-    }];
     [self addSubview:self.menuCollectionView];
     [self.menuCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.leading.trailing.bottom.equalTo(self);
@@ -75,18 +71,6 @@
     return _menuCollectionView;
 }
 
-- (UICollectionView *)decorateCollectionView {
-    if (!_decorateCollectionView) {
-        _decorateCollectionView                                = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:self.flowLayout];
-        _decorateCollectionView.tag                            = JHDECORATE_COLLECTIONVIEW_TAG;
-        _decorateCollectionView.backgroundColor                = [UIColor clearColor];
-        _decorateCollectionView.showsHorizontalScrollIndicator = NO;
-        _decorateCollectionView.delegate                       = self;
-        _decorateCollectionView.dataSource                     = self;
-    }
-    return _decorateCollectionView;
-}
-
 - (UICollectionViewFlowLayout *)flowLayout {
     if (!_flowLayout) {
         _flowLayout                    = [[UICollectionViewFlowLayout alloc] init];
@@ -99,8 +83,8 @@
 #pragma mark UICollectionViewDelegateFlowLayout
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if ([self.delegate respondsToSelector:@selector(menuView:sizeForItemAtIndexPath:)]) {
-        return [self.delegate menuView:self sizeForItemAtIndexPath:indexPath];
+    if ([self.delegate respondsToSelector:@selector(menuView:sizeForItemAtIndex:)]) {
+        return [self.delegate menuView:self sizeForItemAtIndex:indexPath.row];
     }
     return CGSizeZero;
 }
@@ -112,19 +96,13 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (collectionView.tag == JHMENU_COLLECTIONVIEW_TAG) {
-        JHPageMenuItem *item = [self.dataSource menuView:self menuCellForItemAtIndexPath:indexPath];
-        if (indexPath.row == self.selectIndex) {
-            [item setSelected:YES withAnimation:NO];
-        } else {
-            [item setSelected:NO withAnimation:NO];
-        }
-        return item;
+    JHPageMenuItem *item = [self.dataSource menuView:self menuCellForItemAtIndex:indexPath.row];
+    if (indexPath.row == self.selectIndex) {
+        [item setSelected:YES withAnimation:NO];
     } else {
-        JHPageMenuItem *item = [self.dataSource menuView:self decorateCellForItemAtIndexPath:indexPath];
-        return item;
+        [item setSelected:NO withAnimation:NO];
     }
-    return nil;
+    return item;
 }
 
 #pragma mark - UICollectionViewDelegate
@@ -136,13 +114,7 @@
 #pragma makr - UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    UICollectionView *collectionView = (UICollectionView *)scrollView;
-    //同步两个collectionView的滚动
-    if (collectionView.tag == JHMENU_COLLECTIONVIEW_TAG) {
-        [self.decorateCollectionView setContentOffset:collectionView.contentOffset];
-    } else {
-        [self.menuCollectionView setContentOffset:collectionView.contentOffset];
-    }
+    
 }
 
 #pragma mark - JHMenuViewDataSource
@@ -165,14 +137,14 @@
 
 - (void)selectItemAtIndex:(NSInteger)index {
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
-    JHPageMenuItem *item = [self.dataSource menuView:self menuCellForItemAtIndexPath:indexPath];
+    JHPageMenuItem *item = [self.dataSource menuView:self menuCellForItemAtIndex:indexPath.row];
     if (!item) {
         return;
     }
     self.selectIndex = index;
     [self.menuCollectionView reloadData];
-    if ([self.delegate respondsToSelector:@selector(menuView:didSelectIndexPath:)]) {
-        [self.delegate menuView:self didSelectIndexPath:indexPath];
+    if ([self.delegate respondsToSelector:@selector(menuView:didSelectIndex:)]) {
+        [self.delegate menuView:self didSelectIndex:indexPath.row];
     }
     [self refreshContentOffsetItemFrame:item.frame];
 }

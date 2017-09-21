@@ -10,17 +10,28 @@
 
 @implementation JHPageMenuItem
 
+#pragma mark - Assist-Method
+
 + (void)registerMenuItemNibCollectionView:(UICollectionView *)collectionView {
     [collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([self class]) bundle:nil] forCellWithReuseIdentifier:NSStringFromClass([self class])];
 }
 
-+ (instancetype)collectionView:(UICollectionView *)collectionView itemForIndexPath:(NSIndexPath *)indexPath {
++ (instancetype)collectionView:(UICollectionView *)collectionView itemForIndex:(NSInteger)index {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
     return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([self class]) forIndexPath:indexPath];
 }
 
-- (void)menuItemSelectedStyle {}
+#pragma mark - Overwrite
 
-- (void)menuItemNormalStyle {}
+- (void)menuItemSelectedStyle {
+    // 告知菜单正常情况下的样式，自定义的菜单需要重写该方法
+}
+
+- (void)menuItemNormalStyle {
+    // 告知菜单选中时的样式，自定义的菜单需要重写该方法
+}
+
+#pragma mark - Public
 
 - (void)setSelected:(BOOL)selected withAnimation:(BOOL)animation {
     self.itemSelected = selected;

@@ -16,8 +16,6 @@
 		94E2C1E31F73572F007BB183 /* JHPageMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E2C1E21F73572F007BB183 /* JHPageMenuView.m */; };
 		94E2C1E61F73575C007BB183 /* JHPageMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E2C1E51F73575C007BB183 /* JHPageMenuItem.m */; };
 		94E2C1E91F735908007BB183 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94E2C1E81F735908007BB183 /* Main.storyboard */; };
-		94E2C1F41F73591B007BB183 /* CustomDecorateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E2C1EB1F73591B007BB183 /* CustomDecorateCell.m */; };
-		94E2C1F51F73591B007BB183 /* CustomDecorateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94E2C1EC1F73591B007BB183 /* CustomDecorateCell.xib */; };
 		94E2C1F61F73591B007BB183 /* CustomMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E2C1EE1F73591B007BB183 /* CustomMenuCell.m */; };
 		94E2C1F71F73591B007BB183 /* CustomMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94E2C1EF1F73591B007BB183 /* CustomMenuCell.xib */; };
 		94E2C1F81F73591B007BB183 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E2C1F11F73591B007BB183 /* MenuViewController.m */; };
@@ -64,9 +62,6 @@
 		94E2C1E51F73575C007BB183 /* JHPageMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHPageMenuItem.m; sourceTree = "<group>"; };
 		94E2C1E71F735773007BB183 /* JHPageMenuConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JHPageMenuConstant.h; sourceTree = "<group>"; };
 		94E2C1E81F735908007BB183 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		94E2C1EA1F73591B007BB183 /* CustomDecorateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomDecorateCell.h; sourceTree = "<group>"; };
-		94E2C1EB1F73591B007BB183 /* CustomDecorateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomDecorateCell.m; sourceTree = "<group>"; };
-		94E2C1EC1F73591B007BB183 /* CustomDecorateCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomDecorateCell.xib; sourceTree = "<group>"; };
 		94E2C1ED1F73591B007BB183 /* CustomMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomMenuCell.h; sourceTree = "<group>"; };
 		94E2C1EE1F73591B007BB183 /* CustomMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomMenuCell.m; sourceTree = "<group>"; };
 		94E2C1EF1F73591B007BB183 /* CustomMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomMenuCell.xib; sourceTree = "<group>"; };
@@ -148,9 +143,6 @@
 				94E2C1E01F7356F2007BB183 /* JHPageMenuView */,
 				94E2C1B01F7356E9007BB183 /* AppDelegate.h */,
 				94E2C1B11F7356E9007BB183 /* AppDelegate.m */,
-				94E2C1EA1F73591B007BB183 /* CustomDecorateCell.h */,
-				94E2C1EB1F73591B007BB183 /* CustomDecorateCell.m */,
-				94E2C1EC1F73591B007BB183 /* CustomDecorateCell.xib */,
 				94E2C1ED1F73591B007BB183 /* CustomMenuCell.h */,
 				94E2C1EE1F73591B007BB183 /* CustomMenuCell.m */,
 				94E2C1EF1F73591B007BB183 /* CustomMenuCell.xib */,
@@ -316,7 +308,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				94E2C1E91F735908007BB183 /* Main.storyboard in Resources */,
-				94E2C1F51F73591B007BB183 /* CustomDecorateCell.xib in Resources */,
 				94E2C1BD1F7356E9007BB183 /* LaunchScreen.storyboard in Resources */,
 				94E2C1BA1F7356E9007BB183 /* Assets.xcassets in Resources */,
 				94E2C1F71F73591B007BB183 /* CustomMenuCell.xib in Resources */,
@@ -395,7 +386,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				94E2C1F41F73591B007BB183 /* CustomDecorateCell.m in Sources */,
 				94E2C1E61F73575C007BB183 /* JHPageMenuItem.m in Sources */,
 				94E2C1F91F73591B007BB183 /* ViewController.m in Sources */,
 				94E2C1B21F7356E9007BB183 /* AppDelegate.m in Sources */,
