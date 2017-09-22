@@ -215,24 +215,25 @@
     if ([self.delegate respondsToSelector:@selector(menuView:didSelectIndex:)]) {
         [self.delegate menuView:self didSelectIndex:indexPath.row];
     }
-    if ([self.dataSource respondsToSelector:@selector(menuView:decorateCellForItemAtIndex:)]) {
-        [self moveFormIndex:beforeSelectIndex toIndex:self.selectIndex];
-    }
-    [self refreshContentOffsetItemFrame:item.frame];
+    [self moveFormIndex:beforeSelectIndex toIndex:self.selectIndex didAnimationBlock:^{
+        [self refreshContentOffsetItemFrame:item.frame];
+    }];
+    //[self refreshContentOffsetItemFrame:item.frame];
 }
 
-- (void)moveFormIndex:(NSInteger)formIndex toIndex:(NSInteger)toIndex {
+- (void)moveFormIndex:(NSInteger)formIndex toIndex:(NSInteger)toIndex didAnimationBlock:(void(^)(void))completion {
     NSIndexPath *formIndexPath = [NSIndexPath indexPathForItem:formIndex inSection:0];
     NSIndexPath *toIndexPath = [NSIndexPath indexPathForItem:toIndex inSection:0];
     JHPageMenuItem *toCell = (JHPageMenuItem *)[self.decorateCollectionView cellForItemAtIndexPath:toIndexPath];
     CGRect rect = [self.decorateCollectionView convertRect:toCell.frame toView:self.decorateCollectionView];
-    CGPoint point = CGPointMake(rect.origin.x + 80/2, 25);
+    CGPoint point = CGPointMake(rect.origin.x + 80/2, 25);;
     if (formIndexPath && toIndexPath) {
         [self.decorateCollectionView beginInteractiveMovementForItemAtIndexPath:formIndexPath];
         [UIView animateWithDuration:.3 animations:^{
             [self.decorateCollectionView updateInteractiveMovementTargetPosition:point];
         } completion:^(BOOL finished) {
             [self.decorateCollectionView endInteractiveMovement];
+            completion();
         }];
     }
 }

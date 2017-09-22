@@ -93,6 +93,4 @@
  */
 - (void)selectItemAtIndex:(NSInteger)index;
 
-- (void)moveFormIndex:(NSInteger)formIndex toIndex:(NSInteger)toIndex;
-
 @end

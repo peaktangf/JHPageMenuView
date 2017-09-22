@@ -35,8 +35,6 @@
         make.top.leading.trailing.equalTo(self.view);
         make.height.mas_equalTo(50);
     }];
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"cell移动" style:UIBarButtonItemStylePlain target:self action:@selector(moveToPostiot)];
-    self.navigationItem.rightBarButtonItem = rightItem;
 }
 
 #pragma mark - getter
@@ -49,7 +47,7 @@
         [CustomDecorateCell registerItemNibCollectionView:_menuView.decorateCollectionView];
         _menuView.delegate = self;
         _menuView.dataSource = self;
-        //[_menuView selectItemAtIndex:5];
+        [_menuView selectItemAtIndex:5];
     }
     return _menuView;
 }
@@ -82,10 +80,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-}
-
-- (void)moveToPostiot {
-    [self.menuView moveFormIndex:0 toIndex:2];
 }
 
 @end
