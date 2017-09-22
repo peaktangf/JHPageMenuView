@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-@class JHPageMenuView, JHPageMenuItem;
+@class JHPageMenuView, JHPageMenuItem, JHPageDecorateView;
 
 @protocol JHPageMenuViewDataSource <NSObject>
+@required
 
 /**
  告知 "JHMenuView" 需要多少个菜单
@@ -27,6 +28,16 @@
  @return 菜单内容视图
  */
 - (JHPageMenuItem *)menuView:(JHPageMenuView *)menuView menuCellForItemAtIndex:(NSInteger)index;
+
+@optional
+/**
+ 告知 "JHMenuView" 每个菜单的装饰视图
+ 
+ @param menuView JHPageMenuView
+ @param index 当前需要展示装饰视图的位置
+ @return 菜单装饰视图
+ */
+- (JHPageMenuItem *)menuView:(JHPageMenuView *)menuView decorateCellForItemAtIndex:(NSInteger)index;
 
 @end
 
@@ -70,11 +81,18 @@
  */
 @property (nonatomic, strong) UICollectionView *menuCollectionView;
 
+/** 
+ 装饰collectionView视图 
+ */
+@property (nonatomic, strong) UICollectionView *decorateCollectionView;
+
 /**
  设置选中的菜单
 
  @param index 位置
  */
 - (void)selectItemAtIndex:(NSInteger)index;
+
+- (void)moveFormIndex:(NSInteger)formIndex toIndex:(NSInteger)toIndex;
 
 @end

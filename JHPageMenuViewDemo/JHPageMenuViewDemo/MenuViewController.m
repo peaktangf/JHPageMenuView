@@ -9,6 +9,7 @@
 #import "MenuViewController.h"
 #import "JHPageMenuView.h"
 #import "CustomMenuCell.h"
+#import "CustomDecorateCell.h"
 #import <Masonry.h>
 
 @interface MenuViewController ()<JHPageMenuViewDelegate, JHPageMenuViewDataSource>
@@ -34,6 +35,8 @@
         make.top.leading.trailing.equalTo(self.view);
         make.height.mas_equalTo(50);
     }];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"cell移动" style:UIBarButtonItemStylePlain target:self action:@selector(moveToPostiot)];
+    self.navigationItem.rightBarButtonItem = rightItem;
 }
 
 #pragma mark - getter
@@ -42,10 +45,11 @@
     if (!_menuView) {
         _menuView = [[JHPageMenuView alloc] init];
         _menuView.backgroundColor = [UIColor groupTableViewBackgroundColor];
-        [CustomMenuCell registerMenuItemNibCollectionView:_menuView.menuCollectionView];
+        [CustomMenuCell registerItemNibCollectionView:_menuView.menuCollectionView];
+        [CustomDecorateCell registerItemNibCollectionView:_menuView.decorateCollectionView];
         _menuView.delegate = self;
         _menuView.dataSource = self;
-        [_menuView selectItemAtIndex:5];
+        //[_menuView selectItemAtIndex:5];
     }
     return _menuView;
 }
@@ -61,6 +65,11 @@
     return cell;
 }
 
+- (JHPageMenuItem *)menuView:(JHPageMenuView *)menuView decorateCellForItemAtIndex:(NSInteger)index {
+    CustomDecorateCell *cell = [CustomDecorateCell collectionView:menuView.decorateCollectionView itemForIndex:index];
+    return cell;
+}
+
 #pragma mark - JHMenuViewDelegate
 
 - (CGSize)menuView:(JHPageMenuView *)menuView sizeForItemAtIndex:(NSInteger)index {
@@ -73,6 +82,10 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)moveToPostiot {
+    [self.menuView moveFormIndex:0 toIndex:2];
 }
 
 @end
