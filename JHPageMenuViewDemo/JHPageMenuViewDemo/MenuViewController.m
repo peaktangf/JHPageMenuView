@@ -47,7 +47,7 @@
         [CustomDecorateCell registerItemNibCollectionView:_menuView.decorateCollectionView];
         _menuView.delegate = self;
         _menuView.dataSource = self;
-        [_menuView selectItemAtIndex:5];
+        //[_menuView selectItemAtIndex:5];
     }
     return _menuView;
 }

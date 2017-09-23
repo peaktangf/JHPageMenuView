@@ -12,31 +12,29 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Idb-qQ-r5T" customClass="CustomDecorateCell">
-            <rect key="frame" x="0.0" y="0.0" width="83" height="83"/>
+            <rect key="frame" x="0.0" y="0.0" width="83" height="96"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="83" height="83"/>
+                <rect key="frame" x="0.0" y="0.0" width="83" height="96"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bCt-4x-O1A">
-                        <rect key="frame" x="5" y="81" width="73" height="2"/>
+                        <rect key="frame" x="10" y="10" width="63" height="76"/>
                         <color key="backgroundColor" red="1" green="0.37647058820000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="2" id="3LN-ic-u46"/>
-                        </constraints>
                     </view>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="bCt-4x-O1A" secondAttribute="trailing" constant="5" id="UUK-JX-0z6"/>
-                <constraint firstItem="bCt-4x-O1A" firstAttribute="leading" secondItem="Idb-qQ-r5T" secondAttribute="leading" constant="5" id="Yxu-nu-f6b"/>
-                <constraint firstAttribute="bottom" secondItem="bCt-4x-O1A" secondAttribute="bottom" id="qTr-fJ-JKk"/>
+                <constraint firstItem="bCt-4x-O1A" firstAttribute="leading" secondItem="Idb-qQ-r5T" secondAttribute="leading" constant="10" id="Tlb-3s-AWN"/>
+                <constraint firstAttribute="bottom" secondItem="bCt-4x-O1A" secondAttribute="bottom" constant="10" id="hfY-Rs-Nd6"/>
+                <constraint firstAttribute="trailing" secondItem="bCt-4x-O1A" secondAttribute="trailing" constant="10" id="irS-x6-U6c"/>
+                <constraint firstItem="bCt-4x-O1A" firstAttribute="top" secondItem="Idb-qQ-r5T" secondAttribute="top" constant="10" id="rid-FR-RIx"/>
             </constraints>
-            <size key="customSize" width="83" height="83"/>
+            <size key="customSize" width="83" height="96"/>
             <connections>
                 <outlet property="lineView" destination="bCt-4x-O1A" id="RK3-FS-PRe"/>
             </connections>
-            <point key="canvasLocation" x="-187.5" y="-112.5"/>
+            <point key="canvasLocation" x="-421.5" y="-178"/>
         </collectionViewCell>
     </objects>
 </document>

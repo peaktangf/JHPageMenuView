@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		94485C981F760A1D0093AED5 /* JHPageDecorateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 94485C971F760A1D0093AED5 /* JHPageDecorateModel.m */; };
 		94E2C1AF1F7356E9007BB183 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E2C1AE1F7356E9007BB183 /* main.m */; };
 		94E2C1B21F7356E9007BB183 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E2C1B11F7356E9007BB183 /* AppDelegate.m */; };
 		94E2C1BA1F7356E9007BB183 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94E2C1B91F7356E9007BB183 /* Assets.xcassets */; };
@@ -45,6 +46,8 @@
 /* Begin PBXFileReference section */
 		60CDB9155A2904150A8DD79A /* libPods-JHPageMenuViewDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JHPageMenuViewDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		804501FE7EFCC6D36CD2F95D /* Pods-JHPageMenuViewDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JHPageMenuViewDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-JHPageMenuViewDemo/Pods-JHPageMenuViewDemo.release.xcconfig"; sourceTree = "<group>"; };
+		94485C961F760A1D0093AED5 /* JHPageDecorateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHPageDecorateModel.h; sourceTree = "<group>"; };
+		94485C971F760A1D0093AED5 /* JHPageDecorateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHPageDecorateModel.m; sourceTree = "<group>"; };
 		94E2C1AA1F7356E9007BB183 /* JHPageMenuViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JHPageMenuViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94E2C1AE1F7356E9007BB183 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		94E2C1B01F7356E9007BB183 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -200,6 +203,8 @@
 				94E2C1E21F73572F007BB183 /* JHPageMenuView.m */,
 				94E2C1E41F73575C007BB183 /* JHPageMenuItem.h */,
 				94E2C1E51F73575C007BB183 /* JHPageMenuItem.m */,
+				94485C961F760A1D0093AED5 /* JHPageDecorateModel.h */,
+				94485C971F760A1D0093AED5 /* JHPageDecorateModel.m */,
 				94E2C1E71F735773007BB183 /* JHPageMenuConstant.h */,
 			);
 			name = JHPageMenuView;
@@ -396,6 +401,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				94E2C2171F74DCFD007BB183 /* CustomDecorateCell.m in Sources */,
+				94485C981F760A1D0093AED5 /* JHPageDecorateModel.m in Sources */,
 				94E2C1E61F73575C007BB183 /* JHPageMenuItem.m in Sources */,
 				94E2C1F91F73591B007BB183 /* ViewController.m in Sources */,
 				94E2C1B21F7356E9007BB183 /* AppDelegate.m in Sources */,

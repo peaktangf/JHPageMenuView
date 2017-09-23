@@ -21,13 +21,11 @@
 - (void)menuItemNormalStyle {
     self.lbTitle.text = @"未选中";
     self.lbTitle.textColor = [UIColor grayColor];
-    self.lbTitle.font = [UIFont systemFontOfSize:15];
 }
 
 - (void)menuItemSelectedStyle {
     self.lbTitle.text = @"选中";
-    self.lbTitle.textColor = [UIColor redColor];
-    self.lbTitle.font = [UIFont systemFontOfSize:17];
+    self.lbTitle.textColor = [UIColor whiteColor];
 }
 
 @end

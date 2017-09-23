@@ -86,7 +86,6 @@
         flowLayout.minimumLineSpacing                      = 0;
         flowLayout.scrollDirection                         = UICollectionViewScrollDirectionHorizontal;
         _decorateCollectionView                                = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
-        [_decorateCollectionView registerClass:[JHPageMenuItem class] forCellWithReuseIdentifier:JHDECORATE_DEFAULT_CELL_IDENTIFIER];
         _decorateCollectionView.tag                            = JHDECORATE_COLLECTION_VIEW_TAG;
         _decorateCollectionView.backgroundColor                = [UIColor clearColor];
         _decorateCollectionView.showsHorizontalScrollIndicator = NO;
@@ -126,8 +125,6 @@
     } else {
         if ([self.dataSource respondsToSelector:@selector(menuView:decorateCellForItemAtIndex:)]) {
             item = [self.dataSource menuView:self decorateCellForItemAtIndex:indexPath.row];
-        } else {
-            item = [collectionView dequeueReusableCellWithReuseIdentifier:JHDECORATE_DEFAULT_CELL_IDENTIFIER forIndexPath:indexPath];
         }
     }
     if (item) {
@@ -151,12 +148,16 @@
 
 // 当移动结束的时候会调用这个方法
 - (void)collectionView:(UICollectionView *)collectionView moveItemAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath*)destinationIndexPath {
-    // 取出标记
-    NSString *mark = self.decorateMarks[sourceIndexPath.row];
-    // 移除标记
-    [self.decorateMarks removeObject:mark];
-    // 将标记插入到目标位置
-    [self.decorateMarks insertObject:mark atIndex:destinationIndexPath.row];
+//    // 取出标记
+//    NSNumber *mark = self.decorateMarks[sourceIndexPath.row];
+//    // 取出目标标记
+//    NSNumber *toMark = self.decorateMarks[destinationIndexPath.row];
+//    // 移除标记
+//    [self.decorateMarks removeObject:mark];
+//    // 将标记插入到目标位置
+//    [self.decorateMarks insertObject:mark atIndex:destinationIndexPath.row];
+    // 刷新列表
+    //[self.decorateCollectionView reloadData];
 }
 
 #pragma mark - UICollectionViewDelegate
@@ -182,7 +183,7 @@
     NSInteger menuCount = [self.dataSource numbersOfItemsInMenuView:self];
     if (menuCount > 0 && self.decorateMarks.count == 0) {
         for (int i = 0; i < menuCount; i++) {
-            [self.decorateMarks addObject:[NSString stringWithFormat:@"decorate%d",i]];
+            [self.decorateMarks addObject:[NSString stringWithFormat:@"decorate_mark_%d",i]];
         }
     }
     return menuCount;
@@ -211,14 +212,13 @@
     }
     NSInteger beforeSelectIndex = self.selectIndex;
     self.selectIndex = index;
-    [self.menuCollectionView reloadData];
     if ([self.delegate respondsToSelector:@selector(menuView:didSelectIndex:)]) {
         [self.delegate menuView:self didSelectIndex:indexPath.row];
     }
     [self moveFormIndex:beforeSelectIndex toIndex:self.selectIndex didAnimationBlock:^{
+        [self.menuCollectionView reloadData];
         [self refreshContentOffsetItemFrame:item.frame];
     }];
-    //[self refreshContentOffsetItemFrame:item.frame];
 }
 
 - (void)moveFormIndex:(NSInteger)formIndex toIndex:(NSInteger)toIndex didAnimationBlock:(void(^)(void))completion {
