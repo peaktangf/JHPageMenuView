@@ -7,7 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		94485C981F760A1D0093AED5 /* JHPageDecorateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 94485C971F760A1D0093AED5 /* JHPageDecorateModel.m */; };
+		94485C9B1F762AC50093AED5 /* JHPageDecorateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94485C9A1F762AC50093AED5 /* JHPageDecorateView.m */; };
+		94485CAE1F7650760093AED5 /* JHPageDecorateBuiltInItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 94485CAD1F7650760093AED5 /* JHPageDecorateBuiltInItem.m */; };
+		94485CC21F7660AF0093AED5 /* CustomMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94485CB71F7660AF0093AED5 /* CustomMenuCell.m */; };
+		94485CC31F7660AF0093AED5 /* CustomMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94485CB81F7660AF0093AED5 /* CustomMenuCell.xib */; };
+		94485CC41F7660AF0093AED5 /* MenuStylesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94485CBB1F7660AF0093AED5 /* MenuStylesViewController.m */; };
+		94485CC51F7660AF0093AED5 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94485CBD1F7660AF0093AED5 /* MenuViewController.m */; };
+		94485CC61F7660AF0093AED5 /* MenuDirectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94485CBF1F7660AF0093AED5 /* MenuDirectionViewController.m */; };
+		94485CC91F766AFD0093AED5 /* CustomDecorateItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 94485CC81F766AFD0093AED5 /* CustomDecorateItem.m */; };
+		94485CCB1F766B0A0093AED5 /* CustomDecorateItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94485CCA1F766B0A0093AED5 /* CustomDecorateItem.xib */; };
 		94E2C1AF1F7356E9007BB183 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E2C1AE1F7356E9007BB183 /* main.m */; };
 		94E2C1B21F7356E9007BB183 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E2C1B11F7356E9007BB183 /* AppDelegate.m */; };
 		94E2C1BA1F7356E9007BB183 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94E2C1B91F7356E9007BB183 /* Assets.xcassets */; };
@@ -16,13 +24,6 @@
 		94E2C1D31F7356E9007BB183 /* JHPageMenuViewDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E2C1D21F7356E9007BB183 /* JHPageMenuViewDemoUITests.m */; };
 		94E2C1E31F73572F007BB183 /* JHPageMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E2C1E21F73572F007BB183 /* JHPageMenuView.m */; };
 		94E2C1E61F73575C007BB183 /* JHPageMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E2C1E51F73575C007BB183 /* JHPageMenuItem.m */; };
-		94E2C1E91F735908007BB183 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94E2C1E81F735908007BB183 /* Main.storyboard */; };
-		94E2C1F61F73591B007BB183 /* CustomMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E2C1EE1F73591B007BB183 /* CustomMenuCell.m */; };
-		94E2C1F71F73591B007BB183 /* CustomMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94E2C1EF1F73591B007BB183 /* CustomMenuCell.xib */; };
-		94E2C1F81F73591B007BB183 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E2C1F11F73591B007BB183 /* MenuViewController.m */; };
-		94E2C1F91F73591B007BB183 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E2C1F31F73591B007BB183 /* ViewController.m */; };
-		94E2C2171F74DCFD007BB183 /* CustomDecorateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E2C2151F74DCFD007BB183 /* CustomDecorateCell.m */; };
-		94E2C2181F74DCFD007BB183 /* CustomDecorateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94E2C2161F74DCFD007BB183 /* CustomDecorateCell.xib */; };
 		EF71B2249BEB540BE54888F2 /* libPods-JHPageMenuViewDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60CDB9155A2904150A8DD79A /* libPods-JHPageMenuViewDemo.a */; };
 /* End PBXBuildFile section */
 
@@ -46,8 +47,22 @@
 /* Begin PBXFileReference section */
 		60CDB9155A2904150A8DD79A /* libPods-JHPageMenuViewDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JHPageMenuViewDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		804501FE7EFCC6D36CD2F95D /* Pods-JHPageMenuViewDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JHPageMenuViewDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-JHPageMenuViewDemo/Pods-JHPageMenuViewDemo.release.xcconfig"; sourceTree = "<group>"; };
-		94485C961F760A1D0093AED5 /* JHPageDecorateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHPageDecorateModel.h; sourceTree = "<group>"; };
-		94485C971F760A1D0093AED5 /* JHPageDecorateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHPageDecorateModel.m; sourceTree = "<group>"; };
+		94485C991F762AC50093AED5 /* JHPageDecorateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHPageDecorateView.h; sourceTree = "<group>"; };
+		94485C9A1F762AC50093AED5 /* JHPageDecorateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHPageDecorateView.m; sourceTree = "<group>"; };
+		94485CAC1F7650760093AED5 /* JHPageDecorateBuiltInItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHPageDecorateBuiltInItem.h; sourceTree = "<group>"; };
+		94485CAD1F7650760093AED5 /* JHPageDecorateBuiltInItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHPageDecorateBuiltInItem.m; sourceTree = "<group>"; };
+		94485CB61F7660AF0093AED5 /* CustomMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomMenuCell.h; sourceTree = "<group>"; };
+		94485CB71F7660AF0093AED5 /* CustomMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomMenuCell.m; sourceTree = "<group>"; };
+		94485CB81F7660AF0093AED5 /* CustomMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomMenuCell.xib; sourceTree = "<group>"; };
+		94485CBA1F7660AF0093AED5 /* MenuStylesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuStylesViewController.h; sourceTree = "<group>"; };
+		94485CBB1F7660AF0093AED5 /* MenuStylesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuStylesViewController.m; sourceTree = "<group>"; };
+		94485CBC1F7660AF0093AED5 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		94485CBD1F7660AF0093AED5 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		94485CBE1F7660AF0093AED5 /* MenuDirectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuDirectionViewController.h; sourceTree = "<group>"; };
+		94485CBF1F7660AF0093AED5 /* MenuDirectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuDirectionViewController.m; sourceTree = "<group>"; };
+		94485CC71F766AFD0093AED5 /* CustomDecorateItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomDecorateItem.h; sourceTree = "<group>"; };
+		94485CC81F766AFD0093AED5 /* CustomDecorateItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomDecorateItem.m; sourceTree = "<group>"; };
+		94485CCA1F766B0A0093AED5 /* CustomDecorateItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomDecorateItem.xib; sourceTree = "<group>"; };
 		94E2C1AA1F7356E9007BB183 /* JHPageMenuViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JHPageMenuViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94E2C1AE1F7356E9007BB183 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		94E2C1B01F7356E9007BB183 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -66,17 +81,6 @@
 		94E2C1E41F73575C007BB183 /* JHPageMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHPageMenuItem.h; sourceTree = "<group>"; };
 		94E2C1E51F73575C007BB183 /* JHPageMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHPageMenuItem.m; sourceTree = "<group>"; };
 		94E2C1E71F735773007BB183 /* JHPageMenuConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JHPageMenuConstant.h; sourceTree = "<group>"; };
-		94E2C1E81F735908007BB183 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		94E2C1ED1F73591B007BB183 /* CustomMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomMenuCell.h; sourceTree = "<group>"; };
-		94E2C1EE1F73591B007BB183 /* CustomMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomMenuCell.m; sourceTree = "<group>"; };
-		94E2C1EF1F73591B007BB183 /* CustomMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomMenuCell.xib; sourceTree = "<group>"; };
-		94E2C1F01F73591B007BB183 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
-		94E2C1F11F73591B007BB183 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
-		94E2C1F21F73591B007BB183 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		94E2C1F31F73591B007BB183 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		94E2C2141F74DCFD007BB183 /* CustomDecorateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomDecorateCell.h; sourceTree = "<group>"; };
-		94E2C2151F74DCFD007BB183 /* CustomDecorateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomDecorateCell.m; sourceTree = "<group>"; };
-		94E2C2161F74DCFD007BB183 /* CustomDecorateCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomDecorateCell.xib; sourceTree = "<group>"; };
 		FD09AF10E0F6E84F70CF5BCF /* Pods-JHPageMenuViewDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JHPageMenuViewDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JHPageMenuViewDemo/Pods-JHPageMenuViewDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,6 +127,32 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		94485CB21F7660AF0093AED5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				94485CB61F7660AF0093AED5 /* CustomMenuCell.h */,
+				94485CB71F7660AF0093AED5 /* CustomMenuCell.m */,
+				94485CB81F7660AF0093AED5 /* CustomMenuCell.xib */,
+				94485CC71F766AFD0093AED5 /* CustomDecorateItem.h */,
+				94485CC81F766AFD0093AED5 /* CustomDecorateItem.m */,
+				94485CCA1F766B0A0093AED5 /* CustomDecorateItem.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		94485CB91F7660AF0093AED5 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				94485CBE1F7660AF0093AED5 /* MenuDirectionViewController.h */,
+				94485CBF1F7660AF0093AED5 /* MenuDirectionViewController.m */,
+				94485CBA1F7660AF0093AED5 /* MenuStylesViewController.h */,
+				94485CBB1F7660AF0093AED5 /* MenuStylesViewController.m */,
+				94485CBC1F7660AF0093AED5 /* MenuViewController.h */,
+				94485CBD1F7660AF0093AED5 /* MenuViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		94E2C1A11F7356E9007BB183 = {
 			isa = PBXGroup;
 			children = (
@@ -151,17 +181,8 @@
 				94E2C1E01F7356F2007BB183 /* JHPageMenuView */,
 				94E2C1B01F7356E9007BB183 /* AppDelegate.h */,
 				94E2C1B11F7356E9007BB183 /* AppDelegate.m */,
-				94E2C1ED1F73591B007BB183 /* CustomMenuCell.h */,
-				94E2C1EE1F73591B007BB183 /* CustomMenuCell.m */,
-				94E2C1EF1F73591B007BB183 /* CustomMenuCell.xib */,
-				94E2C2141F74DCFD007BB183 /* CustomDecorateCell.h */,
-				94E2C2151F74DCFD007BB183 /* CustomDecorateCell.m */,
-				94E2C2161F74DCFD007BB183 /* CustomDecorateCell.xib */,
-				94E2C1F01F73591B007BB183 /* MenuViewController.h */,
-				94E2C1F11F73591B007BB183 /* MenuViewController.m */,
-				94E2C1F21F73591B007BB183 /* ViewController.h */,
-				94E2C1F31F73591B007BB183 /* ViewController.m */,
-				94E2C1E81F735908007BB183 /* Main.storyboard */,
+				94485CB21F7660AF0093AED5 /* View */,
+				94485CB91F7660AF0093AED5 /* ViewController */,
 				94E2C1B91F7356E9007BB183 /* Assets.xcassets */,
 				94E2C1BB1F7356E9007BB183 /* LaunchScreen.storyboard */,
 				94E2C1BE1F7356E9007BB183 /* Info.plist */,
@@ -201,10 +222,12 @@
 			children = (
 				94E2C1E11F73572F007BB183 /* JHPageMenuView.h */,
 				94E2C1E21F73572F007BB183 /* JHPageMenuView.m */,
+				94485C991F762AC50093AED5 /* JHPageDecorateView.h */,
+				94485C9A1F762AC50093AED5 /* JHPageDecorateView.m */,
 				94E2C1E41F73575C007BB183 /* JHPageMenuItem.h */,
 				94E2C1E51F73575C007BB183 /* JHPageMenuItem.m */,
-				94485C961F760A1D0093AED5 /* JHPageDecorateModel.h */,
-				94485C971F760A1D0093AED5 /* JHPageDecorateModel.m */,
+				94485CAC1F7650760093AED5 /* JHPageDecorateBuiltInItem.h */,
+				94485CAD1F7650760093AED5 /* JHPageDecorateBuiltInItem.m */,
 				94E2C1E71F735773007BB183 /* JHPageMenuConstant.h */,
 			);
 			name = JHPageMenuView;
@@ -320,11 +343,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				94E2C1E91F735908007BB183 /* Main.storyboard in Resources */,
+				94485CCB1F766B0A0093AED5 /* CustomDecorateItem.xib in Resources */,
 				94E2C1BD1F7356E9007BB183 /* LaunchScreen.storyboard in Resources */,
-				94E2C2181F74DCFD007BB183 /* CustomDecorateCell.xib in Resources */,
 				94E2C1BA1F7356E9007BB183 /* Assets.xcassets in Resources */,
-				94E2C1F71F73591B007BB183 /* CustomMenuCell.xib in Resources */,
+				94485CC31F7660AF0093AED5 /* CustomMenuCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,15 +422,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				94E2C2171F74DCFD007BB183 /* CustomDecorateCell.m in Sources */,
-				94485C981F760A1D0093AED5 /* JHPageDecorateModel.m in Sources */,
 				94E2C1E61F73575C007BB183 /* JHPageMenuItem.m in Sources */,
-				94E2C1F91F73591B007BB183 /* ViewController.m in Sources */,
+				94485C9B1F762AC50093AED5 /* JHPageDecorateView.m in Sources */,
+				94485CC21F7660AF0093AED5 /* CustomMenuCell.m in Sources */,
+				94485CC91F766AFD0093AED5 /* CustomDecorateItem.m in Sources */,
 				94E2C1B21F7356E9007BB183 /* AppDelegate.m in Sources */,
-				94E2C1F61F73591B007BB183 /* CustomMenuCell.m in Sources */,
-				94E2C1F81F73591B007BB183 /* MenuViewController.m in Sources */,
+				94485CC61F7660AF0093AED5 /* MenuDirectionViewController.m in Sources */,
 				94E2C1E31F73572F007BB183 /* JHPageMenuView.m in Sources */,
+				94485CAE1F7650760093AED5 /* JHPageDecorateBuiltInItem.m in Sources */,
 				94E2C1AF1F7356E9007BB183 /* main.m in Sources */,
+				94485CC41F7660AF0093AED5 /* MenuStylesViewController.m in Sources */,
+				94485CC51F7660AF0093AED5 /* MenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

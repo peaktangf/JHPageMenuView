@@ -20,12 +20,12 @@
 
 - (void)menuItemNormalStyle {
     self.lbTitle.text = @"未选中";
-    self.lbTitle.textColor = [UIColor grayColor];
+    self.lbTitle.textColor = self.decorateStyle == JHPageDecorateStyleFlood ? [UIColor redColor] : [UIColor grayColor];
 }
 
 - (void)menuItemSelectedStyle {
     self.lbTitle.text = @"选中";
-    self.lbTitle.textColor = [UIColor whiteColor];
+    self.lbTitle.textColor = self.decorateStyle == JHPageDecorateStyleFlood ? [UIColor whiteColor] : [UIColor redColor];
 }
 
 @end

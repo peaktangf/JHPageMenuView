@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JHPageMenuConstant.h"
 @class JHPageMenuView, JHPageMenuItem, JHPageDecorateView;
 
 @protocol JHPageMenuViewDataSource <NSObject>
 @required
-
 /**
  告知 "JHMenuView" 需要多少个菜单
  
@@ -31,27 +31,17 @@
 
 @optional
 /**
- 告知 "JHMenuView" 每个菜单的装饰视图
- 
+ 告知 "JHMenuView" 的装饰视图，如果实现了这个方法，且返回的装饰视图部位nil，装饰视图就会使用自定义的，设置的内置装饰样式将不会生效
+
  @param menuView JHPageMenuView
- @param index 当前需要展示装饰视图的位置
- @return 菜单装饰视图
+ @return 装饰视图
  */
-- (JHPageMenuItem *)menuView:(JHPageMenuView *)menuView decorateCellForItemAtIndex:(NSInteger)index;
+- (UIView *)decorateItemInMenuView:(JHPageMenuView *)menuView;
 
 @end
 
 @protocol JHPageMenuViewDelegate <NSObject>
 @optional
-
-/**
- 告知 "JHMenuView" 每个菜单的大小
- 
- @param menuView JHPageMenuView
- @param index 当前显示菜单的位置
- @return 大小
- */
-- (CGSize)menuView:(JHPageMenuView *)menuView sizeForItemAtIndex:(NSInteger)index;
 
 /**
  当点击菜单子视图的时候，你可能需要做些事情，可以在这里面实现
@@ -61,30 +51,26 @@
  */
 - (void)menuView:(JHPageMenuView *)menuView didSelectIndex:(NSInteger)index;
 
-/**
- 当菜单切换完成之后，你可能需要做些事情，可以在这里面实现
- 
- @param menuView JHPageMenuView
- @param index 当前切换到的菜单视图的位置
- */
-- (void)menuView:(JHPageMenuView *)menuView didAnimationIndex:(NSInteger)index;
-
 @end
 
 @interface JHPageMenuView : UIView<JHPageMenuViewDelegate>
 
 @property (nonatomic, weak) id<JHPageMenuViewDelegate> delegate;
 @property (nonatomic, weak) id<JHPageMenuViewDataSource> dataSource;
-
-/** 
- 菜单collectionView视图 
- */
+/** 菜单视图 */
 @property (nonatomic, strong) UICollectionView *menuCollectionView;
-
-/** 
- 装饰collectionView视图 
- */
-@property (nonatomic, strong) UICollectionView *decorateCollectionView;
+/** 装饰视图 */
+@property (nonatomic, strong) JHPageDecorateView *decorateView;
+/** 菜单滚动方向 */
+@property (nonatomic, assign) JHPageMenuScrollDirection scrollDirection;
+/** 菜单单元格大小 */
+@property (nonatomic, assign) CGSize menuSize;
+/** 内置的装饰样式 */
+@property (nonatomic, assign) JHPageDecorateStyle decorateStyle;
+/** 内置的装饰样式的颜色 */
+@property (nonatomic, strong) UIColor *decorateColor;
+/** 内置的装饰大小 */
+@property (nonatomic, assign) CGSize decorateSize;
 
 /**
  设置选中的菜单

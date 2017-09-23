@@ -10,4 +10,6 @@
 
 @interface CustomMenuCell : JHPageMenuItem
 
+@property (nonatomic, assign) JHPageDecorateStyle decorateStyle;
+
 @end

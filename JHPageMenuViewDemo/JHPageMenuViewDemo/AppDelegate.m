@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "MenuDirectionViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    MenuDirectionViewController *rootVc = [[MenuDirectionViewController alloc] init];
+    UINavigationController *navC = [[UINavigationController alloc] initWithRootViewController:rootVc];
+    navC.navigationBar.translucent = NO;
+    self.window.rootViewController = navC;
     return YES;
 }
 

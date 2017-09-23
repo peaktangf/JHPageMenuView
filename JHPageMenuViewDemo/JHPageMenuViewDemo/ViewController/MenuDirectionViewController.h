@@ -1,5 +1,5 @@
 //
-//  MenuViewController.h
+//  ViewController.h
 //  JHMenuViewDemo
 //
 //  Created by 谭高丰 on 2017/9/20.
@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MenuViewController : UIViewController
+@interface MenuDirectionViewController : UITableViewController
 
 
 @end
+
