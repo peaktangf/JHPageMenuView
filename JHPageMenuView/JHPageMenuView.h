@@ -31,7 +31,7 @@
 
 @optional
 /**
- 告知 "JHMenuView" 的装饰视图，如果实现了这个方法，且返回的装饰视图部位nil，装饰视图就会使用自定义的，设置的内置装饰样式将不会生效
+ 告知 "JHMenuView" 的装饰器视图，如果实现了这个方法，且返回的装饰器视图不为nil，装饰器视图就会使用自定义的，设置的内置装饰器样式将不会生效
 
  @param menuView JHPageMenuView
  @return 装饰视图
@@ -65,12 +65,12 @@
 @property (nonatomic, assign) JHPageMenuScrollDirection scrollDirection;
 /** 菜单单元格大小 */
 @property (nonatomic, assign) CGSize menuSize;
-/** 内置的装饰样式 */
-@property (nonatomic, assign) JHPageDecorateStyle decorateStyle;
-/** 内置的装饰样式的颜色 */
-@property (nonatomic, strong) UIColor *decorateColor;
-/** 内置的装饰大小 */
+/** 内置的装饰器大小 */
 @property (nonatomic, assign) CGSize decorateSize;
+/** 内置的装饰器样式 */
+@property (nonatomic, assign) JHPageDecorateStyle decorateStyle;
+/** 内置的装饰器样式的颜色 */
+@property (nonatomic, strong) UIColor *decorateColor;
 
 /**
  设置选中的菜单

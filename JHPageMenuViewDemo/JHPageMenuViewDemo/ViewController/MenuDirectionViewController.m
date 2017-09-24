@@ -25,7 +25,7 @@ static NSString *MENU_DIRECTION_IDENTIFIER = @"MenuDirectionCell";
 }
 
 - (void)setupData {
-    self.datas = @[@"顶部菜单",@"左边菜单"];
+    self.datas = @[@"横向菜单",@"竖向菜单"];
 }
 
 - (void)setupView {

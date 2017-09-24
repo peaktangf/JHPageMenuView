@@ -13,6 +13,7 @@
 
 @interface JHPageMenuView ()<UICollectionViewDelegate, UICollectionViewDataSource>
 
+/** collectionView布局对象 */
 @property (nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
 /** 菜单个数 */
 @property (nonatomic, assign) NSInteger menuCount;
@@ -159,10 +160,7 @@
 }
 
 - (void)willMoveToSuperview:(UIView *)newSuperview {
-    if (newSuperview == nil) {
-        return;
-    }
-    if (self.selectIndex == 0) {
+    if (newSuperview == nil || self.selectIndex == 0) {
         return;
     }
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -190,7 +188,6 @@
 
 // 让选中的item位于中间
 - (void)refreshContentOffsetItemFrame:(CGRect)frame {
-    
     CGSize contentSize = self.menuCollectionView.contentSize;
     if (self.scrollDirection == JHPageMenuScrollDirectionHorizontal) {
         CGFloat itemX = frame.origin.x;
@@ -202,7 +199,6 @@
             } else {
                 targetX = itemX - itemWith/2 + frame.size.width/2;
             }
-            // 应该有更好的解决方法
             if (targetX + itemWith > contentSize.width) {
                 targetX = contentSize.width - itemWith;
             }
@@ -220,7 +216,6 @@
             } else {
                 targetY = itemY - itemHeight/2 + frame.size.height/2;
             }
-            // 应该有更好的解决方法
             if (targetY + itemHeight > contentSize.height) {
                 targetY = contentSize.height - itemHeight;
             }

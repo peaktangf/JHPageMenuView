@@ -10,9 +10,7 @@
 #define JHPageMenuConstant_h
 
 #import <Masonry.h>
-static const NSInteger JHMENU_COLLECTION_VIEW_TAG         = 11;
-static const NSInteger JHDECORATE_COLLECTION_VIEW_TAG     = 22;
-static NSString *JHDECORATE_DEFAULT_CELL_IDENTIFIER        = @"jh_decorate_default_cell_identifier";
+static const NSInteger JHMENU_COLLECTION_VIEW_TAG = 1111;
 
 /**
  菜单选中和未选中的样式
