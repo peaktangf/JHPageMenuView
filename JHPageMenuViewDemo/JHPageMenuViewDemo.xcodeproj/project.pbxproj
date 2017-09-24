@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		943D66751F77B3070077B1BD /* CustomMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 943D66741F77B3070077B1BD /* CustomMenuItem.m */; };
+		943D66771F77B3160077B1BD /* CustomMenuItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 943D66761F77B3160077B1BD /* CustomMenuItem.xib */; };
 		94485C9B1F762AC50093AED5 /* JHPageDecorateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94485C9A1F762AC50093AED5 /* JHPageDecorateView.m */; };
 		94485CAE1F7650760093AED5 /* JHPageDecorateBuiltInItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 94485CAD1F7650760093AED5 /* JHPageDecorateBuiltInItem.m */; };
-		94485CC21F7660AF0093AED5 /* CustomMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94485CB71F7660AF0093AED5 /* CustomMenuCell.m */; };
-		94485CC31F7660AF0093AED5 /* CustomMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94485CB81F7660AF0093AED5 /* CustomMenuCell.xib */; };
 		94485CC41F7660AF0093AED5 /* MenuStylesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94485CBB1F7660AF0093AED5 /* MenuStylesViewController.m */; };
 		94485CC51F7660AF0093AED5 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94485CBD1F7660AF0093AED5 /* MenuViewController.m */; };
 		94485CC61F7660AF0093AED5 /* MenuDirectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94485CBF1F7660AF0093AED5 /* MenuDirectionViewController.m */; };
@@ -47,13 +47,13 @@
 /* Begin PBXFileReference section */
 		60CDB9155A2904150A8DD79A /* libPods-JHPageMenuViewDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JHPageMenuViewDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		804501FE7EFCC6D36CD2F95D /* Pods-JHPageMenuViewDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JHPageMenuViewDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-JHPageMenuViewDemo/Pods-JHPageMenuViewDemo.release.xcconfig"; sourceTree = "<group>"; };
+		943D66731F77B3070077B1BD /* CustomMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomMenuItem.h; sourceTree = "<group>"; };
+		943D66741F77B3070077B1BD /* CustomMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomMenuItem.m; sourceTree = "<group>"; };
+		943D66761F77B3160077B1BD /* CustomMenuItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomMenuItem.xib; sourceTree = "<group>"; };
 		94485C991F762AC50093AED5 /* JHPageDecorateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHPageDecorateView.h; sourceTree = "<group>"; };
 		94485C9A1F762AC50093AED5 /* JHPageDecorateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHPageDecorateView.m; sourceTree = "<group>"; };
 		94485CAC1F7650760093AED5 /* JHPageDecorateBuiltInItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHPageDecorateBuiltInItem.h; sourceTree = "<group>"; };
 		94485CAD1F7650760093AED5 /* JHPageDecorateBuiltInItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHPageDecorateBuiltInItem.m; sourceTree = "<group>"; };
-		94485CB61F7660AF0093AED5 /* CustomMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomMenuCell.h; sourceTree = "<group>"; };
-		94485CB71F7660AF0093AED5 /* CustomMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomMenuCell.m; sourceTree = "<group>"; };
-		94485CB81F7660AF0093AED5 /* CustomMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomMenuCell.xib; sourceTree = "<group>"; };
 		94485CBA1F7660AF0093AED5 /* MenuStylesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuStylesViewController.h; sourceTree = "<group>"; };
 		94485CBB1F7660AF0093AED5 /* MenuStylesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuStylesViewController.m; sourceTree = "<group>"; };
 		94485CBC1F7660AF0093AED5 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
@@ -130,9 +130,9 @@
 		94485CB21F7660AF0093AED5 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				94485CB61F7660AF0093AED5 /* CustomMenuCell.h */,
-				94485CB71F7660AF0093AED5 /* CustomMenuCell.m */,
-				94485CB81F7660AF0093AED5 /* CustomMenuCell.xib */,
+				943D66731F77B3070077B1BD /* CustomMenuItem.h */,
+				943D66741F77B3070077B1BD /* CustomMenuItem.m */,
+				943D66761F77B3160077B1BD /* CustomMenuItem.xib */,
 				94485CC71F766AFD0093AED5 /* CustomDecorateItem.h */,
 				94485CC81F766AFD0093AED5 /* CustomDecorateItem.m */,
 				94485CCA1F766B0A0093AED5 /* CustomDecorateItem.xib */,
@@ -343,10 +343,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				943D66771F77B3160077B1BD /* CustomMenuItem.xib in Resources */,
 				94485CCB1F766B0A0093AED5 /* CustomDecorateItem.xib in Resources */,
 				94E2C1BD1F7356E9007BB183 /* LaunchScreen.storyboard in Resources */,
 				94E2C1BA1F7356E9007BB183 /* Assets.xcassets in Resources */,
-				94485CC31F7660AF0093AED5 /* CustomMenuCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,7 +424,6 @@
 			files = (
 				94E2C1E61F73575C007BB183 /* JHPageMenuItem.m in Sources */,
 				94485C9B1F762AC50093AED5 /* JHPageDecorateView.m in Sources */,
-				94485CC21F7660AF0093AED5 /* CustomMenuCell.m in Sources */,
 				94485CC91F766AFD0093AED5 /* CustomDecorateItem.m in Sources */,
 				94E2C1B21F7356E9007BB183 /* AppDelegate.m in Sources */,
 				94485CC61F7660AF0093AED5 /* MenuDirectionViewController.m in Sources */,
@@ -432,6 +431,7 @@
 				94485CAE1F7650760093AED5 /* JHPageDecorateBuiltInItem.m in Sources */,
 				94E2C1AF1F7356E9007BB183 /* main.m in Sources */,
 				94485CC41F7660AF0093AED5 /* MenuStylesViewController.m in Sources */,
+				943D66751F77B3070077B1BD /* CustomMenuItem.m in Sources */,
 				94485CC51F7660AF0093AED5 /* MenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

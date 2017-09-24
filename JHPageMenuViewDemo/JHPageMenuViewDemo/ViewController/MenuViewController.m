@@ -7,7 +7,7 @@
 //
 
 #import "MenuViewController.h"
-#import "CustomMenuCell.h"
+#import "CustomMenuItem.h"
 #import "CustomDecorateItem.h"
 #import <Masonry.h>
 
@@ -37,12 +37,12 @@
     if (self.menuScrollDirection == JHPageMenuScrollDirectionHorizontal) {
         [self.menuView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.leading.trailing.equalTo(self.view);
-            make.height.mas_equalTo(50);
+            make.height.mas_equalTo(self.isCustomMenu ? 100 : 50);
         }];
     } else {
         [self.menuView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.leading.bottom.equalTo(self.view);
-            make.width.mas_equalTo(80);
+            make.width.mas_equalTo(self.isCustomMenu ? 100 : 80);
         }];
     }
 }
@@ -53,17 +53,21 @@
     if (!_menuView) {
         _menuView = [[JHPageMenuView alloc] init];
         _menuView.backgroundColor = [UIColor groupTableViewBackgroundColor];
-        [CustomMenuCell registerItemNibCollectionView:_menuView.menuCollectionView];
         _menuView.delegate = self;
         _menuView.dataSource = self;
         _menuView.scrollDirection = self.menuScrollDirection;
-        _menuView.menuSize = CGSizeMake(80, 50);
+        _menuView.menuSize = self.isCustomMenu ? CGSizeMake(100, 100) : CGSizeMake(80, 50);
         switch (self.decorateStyle) {
             case JHPageDecorateStyleDefault:
                 break;
             case JHPageDecorateStyleLine:
                 _menuView.decorateStyle = JHPageDecorateStyleLine;
-                _menuView.decorateSize = self.menuScrollDirection == JHPageMenuScrollDirectionHorizontal ? CGSizeMake(40, 2) : CGSizeMake(2, 40) ;
+                if (self.isCustomMenu) {
+                    _menuView.decorateSize = self.menuScrollDirection == JHPageMenuScrollDirectionHorizontal ? CGSizeMake(90, 2) : CGSizeMake(2, 90);
+                } else {
+                    _menuView.decorateSize = self.menuScrollDirection == JHPageMenuScrollDirectionHorizontal ? CGSizeMake(40, 2) : CGSizeMake(2, 40);
+                }
+                
                 break;
             case JHPageDecorateStyleFlood:
                 _menuView.decorateStyle = JHPageDecorateStyleFlood;
@@ -85,9 +89,23 @@
 }
 
 - (JHPageMenuItem *)menuView:(JHPageMenuView *)menuView menuCellForItemAtIndex:(NSInteger)index {
-    CustomMenuCell *cell = [CustomMenuCell collectionView:menuView.menuCollectionView itemForIndex:index];
-    cell.decorateStyle = self.decorateStyle;
-    return cell;
+    if (self.isCustomMenu) {
+        CustomMenuItem *item = [CustomMenuItem menuView:menuView itemForIndex:index];
+        return item;
+    } else {
+        JHPageMenuItem *item = [JHPageMenuItem menuView:menuView itemForIndex:index];
+        __weak typeof(self)weakSelf = self;
+        __weak typeof(item)weakItem = item;
+        item.menuItemNormalStyleBlock = ^{
+            weakItem.titleLabel.text = @"未选中";
+            weakItem.titleLabel.textColor = weakSelf.decorateStyle == JHPageDecorateStyleFlood ? [UIColor redColor] : [UIColor grayColor];
+        };
+        item.menuItemSelectedStyleBlock = ^{
+            weakItem.titleLabel.text = @"选中";
+            weakItem.titleLabel.textColor = weakSelf.decorateStyle == JHPageDecorateStyleFlood ? [UIColor whiteColor] : [UIColor redColor];
+        };
+        return item;
+    }    
 }
 
 - (UIView *)decorateItemInMenuView:(JHPageMenuView *)menuView {

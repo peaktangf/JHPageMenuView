@@ -29,7 +29,8 @@ static NSString *MENU_STYLE_IDENTIFIER = @"MenuStyleCell";
                    @{@"name":@"JHPageDecorateStyleLine", @"style":@(JHPageDecorateStyleLine)},
                    @{@"name":@"JHPageDecorateStyleFlood", @"style":@(JHPageDecorateStyleFlood)},
                    @{@"name":@"JHPageDecorateStyleFloodHollow", @"style":@(JHPageDecorateStyleFloodHollow)},
-                   @{@"name":@"自定义", @"style":@(11)}];
+                   @{@"name":@"自定义菜单", @"style":@(11)},
+                   @{@"name":@"自定义装饰器", @"style":@(22)}];
 }
 
 - (void)setupView {
@@ -62,6 +63,9 @@ static NSString *MENU_STYLE_IDENTIFIER = @"MenuStyleCell";
     MenuViewController *vc = [[MenuViewController alloc] init];
     vc.menuScrollDirection = self.menuScrollDirection;
     if ([[self.datas[indexPath.row] objectForKey:@"style"] integerValue] == 11) {
+        vc.isCustomMenu = YES;
+        vc.decorateStyle = JHPageDecorateStyleLine;
+    } else if ([[self.datas[indexPath.row] objectForKey:@"style"] integerValue] == 22) {
         vc.isCustomDecorate = YES;
     } else {
         vc.decorateStyle = [[self.datas[indexPath.row] objectForKey:@"style"] integerValue];

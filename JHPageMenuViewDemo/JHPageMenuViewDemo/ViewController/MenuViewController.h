@@ -26,4 +26,9 @@
  */
 @property (nonatomic, assign) BOOL isCustomDecorate;
 
+/**
+ 是否使用自定义的菜单
+ */
+@property (nonatomic, assign) BOOL isCustomMenu;
+
 @end
