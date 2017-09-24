@@ -14,17 +14,25 @@
 
 @interface MenuViewController ()<JHPageMenuViewDelegate, JHPageMenuViewDataSource>
 @property (nonatomic, strong) JHPageMenuView *menuView;
+@property (nonatomic, assign) NSInteger dataCounts;
 @end
 
 @implementation MenuViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setupData];
     [self setupView];
+}
+
+- (void)setupData {
+    self.dataCounts = 5;
 }
 
 - (void)setupView {
     self.view.backgroundColor = [UIColor whiteColor];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"刷新" style:UIBarButtonItemStylePlain target:self action:@selector(refreshData)];
+    self.navigationItem.rightBarButtonItem = item;
     [self.view addSubview:self.menuView];
     if (self.menuScrollDirection == JHPageMenuScrollDirectionHorizontal) {
         [self.menuView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -73,7 +81,7 @@
 #pragma mark - JHMenuViewDataSource
 
 - (NSInteger)numbersOfItemsInMenuView:(JHPageMenuView *)menuView {
-    return 20;
+    return self.dataCounts;
 }
 
 - (JHPageMenuItem *)menuView:(JHPageMenuView *)menuView menuCellForItemAtIndex:(NSInteger)index {
@@ -111,6 +119,13 @@
 
 - (void)menuView:(JHPageMenuView *)menuView didSelectIndex:(NSInteger)index {
     NSLog(@"当前选中的菜单 = %ld",index);
+}
+
+#pragma mark - action
+
+- (void)refreshData {
+    self.dataCounts = 8 + arc4random() % 10;
+    [self.menuView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {

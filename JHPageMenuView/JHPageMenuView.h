@@ -76,7 +76,13 @@
  设置选中的菜单
 
  @param index 位置
+ @param animation 装饰视图是否动画执行
  */
-- (void)selectItemAtIndex:(NSInteger)index;
+- (void)selectItemAtIndex:(NSInteger)index withAnimation:(BOOL)animation;
+
+/**
+ 刷新数据，该方法会重新执行一遍代理方法，显示最新的数据
+ */
+- (void)reloadData;
 
 @end

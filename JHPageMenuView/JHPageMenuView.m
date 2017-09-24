@@ -122,7 +122,7 @@
 #pragma mark - UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    [self selectItemAtIndex:indexPath.row];
+    [self selectItemAtIndex:indexPath.row withAnimation:YES];
 }
 
 #pragma makr - UIScrollViewDelegate
@@ -151,7 +151,8 @@
         builtInItem.decorateStyle = self.decorateStyle;
         decorateItem = builtInItem;
     }
-    JHPageDecorateView *decorateView = [[JHPageDecorateView alloc] initWithDecorateItem:decorateItem menuscrollDirection:self.scrollDirection decorateNumbers:[self.dataSource numbersOfItemsInMenuView:self] decorateSize:self.menuSize];
+    JHPageDecorateView *decorateView = [[JHPageDecorateView alloc] init];
+    [decorateView setDecorateItem:decorateItem menuscrollDirection:self.scrollDirection decorateNumbers:[self.dataSource numbersOfItemsInMenuView:self] decorateSize:self.menuSize];
     self.decorateView = decorateView;
     [self insertSubview:self.decorateView atIndex:0];
     [self.decorateView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -165,31 +166,15 @@
     }
     dispatch_async(dispatch_get_main_queue(), ^{
         // 当有设置初始菜单下标的时候，等待主队列空闲再执行该方法
-        [self selectItemAtIndex:self.selectIndex];
+        [self selectItemAtIndex:self.selectIndex withAnimation:NO];
     });
-}
-
-- (void)selectItemAtIndex:(NSInteger)index {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
-    JHPageMenuItem *item = [self.dataSource menuView:self menuCellForItemAtIndex:indexPath.row];
-    if (!item) {
-        return;
-    }
-    self.selectIndex = index;
-    if ([self.delegate respondsToSelector:@selector(menuView:didSelectIndex:)]) {
-        [self.delegate menuView:self didSelectIndex:indexPath.row];
-    }
-    [self.menuCollectionView reloadData];
-    if (self.decorateView) {
-        [self.decorateView moveToIndex:self.selectIndex];
-    }
-    [self refreshContentOffsetItemFrame:item.frame];
 }
 
 // 让选中的item位于中间
 - (void)refreshContentOffsetItemFrame:(CGRect)frame {
     CGSize contentSize = self.menuCollectionView.contentSize;
     if (self.scrollDirection == JHPageMenuScrollDirectionHorizontal) {
+        if (contentSize.width <= self.menuCollectionView.frame.size.width) { return; };
         CGFloat itemX = frame.origin.x;
         CGFloat itemWith = self.menuCollectionView.frame.size.width;
         if (itemX > itemWith/2) {
@@ -207,6 +192,7 @@
             [self.menuCollectionView setContentOffset:CGPointMake(0, 0) animated:YES];
         }
     } else {
+        if (contentSize.height <= self.menuCollectionView.frame.size.height) { return; };
         CGFloat itemY = frame.origin.y;
         CGFloat itemHeight = self.menuCollectionView.frame.size.height;
         if (itemY > itemHeight/2) {
@@ -224,6 +210,48 @@
             [self.menuCollectionView setContentOffset:CGPointMake(0, 0) animated:YES];
         }
     }
+}
+
+#pragma mark - Public
+
+- (void)selectItemAtIndex:(NSInteger)index withAnimation:(BOOL)animation {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
+    JHPageMenuItem *item = [self.dataSource menuView:self menuCellForItemAtIndex:indexPath.row];
+    if (!item) {
+        return;
+    }
+    self.selectIndex = index;
+    if ([self.delegate respondsToSelector:@selector(menuView:didSelectIndex:)]) {
+        [self.delegate menuView:self didSelectIndex:indexPath.row];
+    }
+    if (self.decorateView) {
+        [self.decorateView moveToIndex:self.selectIndex withAnimation:animation];
+    }
+    [self.menuCollectionView reloadData];
+    [self refreshContentOffsetItemFrame:item.frame];
+}
+
+- (void)reloadData {
+    if (self.decorateView) {
+        UIView *decorateItem = nil;
+        if ([self.dataSource respondsToSelector:@selector(decorateItemInMenuView:)] && [self.dataSource decorateItemInMenuView:self]) {
+            decorateItem = [self.dataSource decorateItemInMenuView:self];
+        } else {
+            if (self.decorateStyle == JHPageDecorateStyleDefault) return;
+            
+            JHPageDecorateBuiltInItem *builtInItem = [[JHPageDecorateBuiltInItem alloc] init];
+            builtInItem.scrollDirection = self.scrollDirection;
+            builtInItem.decorateSize = self.decorateSize.width == 0 ? self.menuSize : self.decorateSize;
+            builtInItem.decorateColor = self.decorateColor;
+            builtInItem.decorateStyle = self.decorateStyle;
+            decorateItem = builtInItem;
+        }
+        [self.decorateView setDecorateItem:decorateItem menuscrollDirection:self.scrollDirection decorateNumbers:[self.dataSource numbersOfItemsInMenuView:self] decorateSize:self.menuSize];
+    }
+    if (self.selectIndex > (self.menuCount - 1)) {
+        self.selectIndex = 0;
+    }
+    [self selectItemAtIndex:self.selectIndex withAnimation:NO];
 }
 
 @end

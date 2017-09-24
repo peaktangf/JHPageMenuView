@@ -11,24 +11,25 @@
 
 @interface JHPageDecorateView : UIView
 
+/** 滚动视图 */
 @property (nonatomic, strong) UIScrollView *scrollView;
 
 /**
- 初始化方法
-
+ 设置属性
+ 
  @param decorateItem 装饰器
  @param scrollDirection 滚动方向
  @param decorateNumbers 装饰器个数
  @param decorateSize 装饰器大小
- @return 装饰视图
  */
-- (instancetype)initWithDecorateItem:(UIView *)decorateItem menuscrollDirection:(JHPageMenuScrollDirection)scrollDirection decorateNumbers:(NSInteger)decorateNumbers decorateSize:(CGSize)decorateSize;
+- (void)setDecorateItem:(UIView *)decorateItem menuscrollDirection:(JHPageMenuScrollDirection)scrollDirection decorateNumbers:(NSInteger)decorateNumbers decorateSize:(CGSize)decorateSize;
 
 /**
  装饰器移动到指定位置
 
  @param index 指定位置
+ @param animation 是否动画执行
  */
-- (void)moveToIndex:(NSInteger)index;
+- (void)moveToIndex:(NSInteger)index withAnimation:(BOOL)animation;
 
 @end
