@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9414E2AB1F78D82E00C73444 /* NavTabMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9414E2AA1F78D82E00C73444 /* NavTabMenuViewController.m */; };
 		943D66751F77B3070077B1BD /* CustomMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 943D66741F77B3070077B1BD /* CustomMenuItem.m */; };
 		943D66771F77B3160077B1BD /* CustomMenuItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 943D66761F77B3160077B1BD /* CustomMenuItem.xib */; };
 		94485C9B1F762AC50093AED5 /* JHPageDecorateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94485C9A1F762AC50093AED5 /* JHPageDecorateView.m */; };
@@ -47,6 +48,8 @@
 /* Begin PBXFileReference section */
 		60CDB9155A2904150A8DD79A /* libPods-JHPageMenuViewDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JHPageMenuViewDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		804501FE7EFCC6D36CD2F95D /* Pods-JHPageMenuViewDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JHPageMenuViewDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-JHPageMenuViewDemo/Pods-JHPageMenuViewDemo.release.xcconfig"; sourceTree = "<group>"; };
+		9414E2A91F78D82E00C73444 /* NavTabMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavTabMenuViewController.h; sourceTree = "<group>"; };
+		9414E2AA1F78D82E00C73444 /* NavTabMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavTabMenuViewController.m; sourceTree = "<group>"; };
 		943D66731F77B3070077B1BD /* CustomMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomMenuItem.h; sourceTree = "<group>"; };
 		943D66741F77B3070077B1BD /* CustomMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomMenuItem.m; sourceTree = "<group>"; };
 		943D66761F77B3160077B1BD /* CustomMenuItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomMenuItem.xib; sourceTree = "<group>"; };
@@ -149,6 +152,8 @@
 				94485CBB1F7660AF0093AED5 /* MenuStylesViewController.m */,
 				94485CBC1F7660AF0093AED5 /* MenuViewController.h */,
 				94485CBD1F7660AF0093AED5 /* MenuViewController.m */,
+				9414E2A91F78D82E00C73444 /* NavTabMenuViewController.h */,
+				9414E2AA1F78D82E00C73444 /* NavTabMenuViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -427,6 +432,7 @@
 				94485CC91F766AFD0093AED5 /* CustomDecorateItem.m in Sources */,
 				94E2C1B21F7356E9007BB183 /* AppDelegate.m in Sources */,
 				94485CC61F7660AF0093AED5 /* MenuDirectionViewController.m in Sources */,
+				9414E2AB1F78D82E00C73444 /* NavTabMenuViewController.m in Sources */,
 				94E2C1E31F73572F007BB183 /* JHPageMenuView.m in Sources */,
 				94485CAE1F7650760093AED5 /* JHPageDecorateBuiltInItem.m in Sources */,
 				94E2C1AF1F7356E9007BB183 /* main.m in Sources */,

@@ -20,6 +20,20 @@
 @property (nonatomic, assign) NSInteger decorateNumbers;
 /** 装饰器大小 */
 @property (nonatomic, assign) CGSize decorateSize;
+/** 装饰器当前的下标 */
+@property (nonatomic, assign) NSInteger selectIndex;
+/** 装饰器当前的位置 */
+@property (nonatomic, assign) CGFloat position;
+
+
+/** 定时器 */
+@property (nonatomic, weak) CADisplayLink *displayLink;
+/** 装饰器需要移动的距离绝对值（差距） */
+@property (nonatomic, assign) CGFloat gap;
+/** 装饰器每一步需要移动的距离（步伐） */
+@property (nonatomic, assign) CGFloat setp;
+/** 装饰器移动的方向： 1代表正方向，-1代表反方向 */
+@property (nonatomic, assign) int sign;
 
 @end
 
@@ -65,38 +79,6 @@
 
 #pragma mark - public
 
-- (void)moveToIndex:(NSInteger)index withAnimation:(BOOL)animation {
-    if (self.scrollDirection == JHPageMenuScrollDirectionHorizontal) {
-        CGFloat x = index * self.decorateSize.width;
-        if (animation) {
-            [UIView animateWithDuration:.3 animations:^{
-                [self.decorateItem mas_updateConstraints:^(MASConstraintMaker *make) {
-                    make.leading.mas_equalTo(x);
-                }];
-                [self layoutIfNeeded];
-            }];
-        } else {
-            [self.decorateItem mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.leading.mas_equalTo(x);
-            }];
-        }
-    } else {
-        CGFloat y = index * self.decorateSize.height;
-        if (animation) {
-            [UIView animateWithDuration:.3 animations:^{
-                [self.decorateItem mas_updateConstraints:^(MASConstraintMaker *make) {
-                    make.top.mas_equalTo(y);
-                }];
-                [self layoutIfNeeded];
-            }];
-        } else {
-            [self.decorateItem mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.top.mas_equalTo(y);
-            }];
-        }
-    }
-}
-
 - (void)setDecorateItem:(UIView *)decorateItem menuscrollDirection:(JHPageMenuScrollDirection)scrollDirection decorateNumbers:(NSInteger)decorateNumbers decorateSize:(CGSize)decorateSize {
     if (self.decorateItem) { 
         [self.decorateItem removeFromSuperview];
@@ -129,6 +111,53 @@
         make.width.mas_equalTo(self.decorateSize.width);
         make.height.mas_equalTo(self.decorateSize.height);
     }];
+}
+
+- (void)moveToIndex:(NSInteger)index withAnimation:(BOOL)animation {
+    if (self.selectIndex == index) {
+        [self moveToPosition:self.position];
+    } else {
+        self.gap = (self.scrollDirection == JHPageMenuScrollDirectionHorizontal ? self.decorateSize.width : self.decorateSize.height) * labs(index -  self.selectIndex);
+        self.sign = self.selectIndex > index ? -1 : 1;
+        self.setp = animation ? self.gap / 10 : self.gap;
+        self.selectIndex = index;
+        if (self.displayLink) {
+            [self.displayLink invalidate];
+        }
+        // 通过 CADisplayLink 来执行动画
+        CADisplayLink *link = [CADisplayLink displayLinkWithTarget:self selector:@selector(progressChanged)];
+        [link addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
+        self.displayLink = link;
+    }
+}
+
+#pragma mark - private
+
+- (void)progressChanged {
+    if (self.gap > 0) {
+        self.gap -= self.setp;
+        if (self.gap < 0) {
+            [self moveToPosition:self.position + self.sign * self.gap];
+            return;
+        }
+        [self moveToPosition:self.position + self.sign * self.setp];
+    } else {
+        [self moveToPosition:self.position + self.sign * self.gap];
+        [self.displayLink invalidate];
+        self.displayLink = nil;
+    }
+}
+
+- (void)moveToPosition:(CGFloat)pos {
+    self.position = pos;
+    [self.decorateItem mas_updateConstraints:^(MASConstraintMaker *make) {
+        if (self.scrollDirection == JHPageMenuScrollDirectionHorizontal) {
+            make.leading.mas_equalTo(pos);
+        } else {
+            make.top.mas_equalTo(pos);
+        }
+    }];
+    [self layoutIfNeeded];
 }
 
 @end

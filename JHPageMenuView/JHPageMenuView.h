@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "JHPageMenuConstant.h"
-@class JHPageMenuView, JHPageMenuItem, JHPageDecorateView;
+#import "JHPageMenuItem.h"
+@class JHPageMenuView, JHPageDecorateView;
 
 @protocol JHPageMenuViewDataSource <NSObject>
 @required
@@ -82,6 +83,10 @@
 
 /**
  刷新数据，该方法会重新执行一遍代理方法，显示最新的数据
+ 
+ 如果第一次初始化，先设置属性再把分页菜单添加到父视图上，这个方法可以不用执行
+ 如果第一次初始化，先把分页菜单添加到父视图上，再设置属性，那么得执行这个方法，才能展示正确的数据
+ 如果中途数据改变或者属性改变了，都得执行一下该方法才能展示最新的设置和数据
  */
 - (void)reloadData;
 

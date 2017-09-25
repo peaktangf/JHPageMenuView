@@ -8,6 +8,7 @@
 
 #import "MenuDirectionViewController.h"
 #import "MenuStylesViewController.h"
+#import "NavTabMenuViewController.h"
 
 static NSString *MENU_DIRECTION_IDENTIFIER = @"MenuDirectionCell";
 
@@ -19,13 +20,13 @@ static NSString *MENU_DIRECTION_IDENTIFIER = @"MenuDirectionCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"菜单方向";
+    self.title = @"菜单类型";
     [self setupData];
     [self setupView];
 }
 
 - (void)setupData {
-    self.datas = @[@"横向菜单",@"竖向菜单"];
+    self.datas = @[@"横向菜单",@"竖向菜单",@"网易选项卡"];
 }
 
 - (void)setupView {
@@ -49,9 +50,14 @@ static NSString *MENU_DIRECTION_IDENTIFIER = @"MenuDirectionCell";
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    MenuStylesViewController *styleVc = [[MenuStylesViewController alloc] init];
-    styleVc.menuScrollDirection = indexPath.row == 0 ? JHPageMenuScrollDirectionHorizontal : JHPageMenuScrollDirectionVertical;
-    [self.navigationController pushViewController:styleVc animated:YES];
+    if (indexPath.row == 2) {
+        NavTabMenuViewController *tabMenuVc = [[NavTabMenuViewController alloc] init];
+        [self.navigationController pushViewController:tabMenuVc animated:YES];
+    } else {
+        MenuStylesViewController *styleVc = [[MenuStylesViewController alloc] init];
+        styleVc.menuScrollDirection = indexPath.row == 0 ? JHPageMenuScrollDirectionHorizontal : JHPageMenuScrollDirectionVertical;
+        [self.navigationController pushViewController:styleVc animated:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -65,6 +65,11 @@
     self.flowLayout.scrollDirection = scrollDirection == JHPageMenuScrollDirectionHorizontal ? UICollectionViewScrollDirectionHorizontal : UICollectionViewScrollDirectionVertical;
 }
 
+- (void)setFrame:(CGRect)frame {
+//    [super setFrame:frame];
+//    if (!self.menuCollectionView) { return; };
+}
+
 #pragma mark - getter
 
 - (UICollectionView *)menuCollectionView {
@@ -130,7 +135,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     // 菜单视图滚动的时候，装饰视图也要跟着一起滚动
     if (scrollView.tag == JHMENU_COLLECTION_VIEW_TAG) {
-        [_decorateView.scrollView setContentOffset:scrollView.contentOffset];
+        [self.decorateView.scrollView setContentOffset:scrollView.contentOffset];
     }
 }
 
@@ -161,12 +166,17 @@
 }
 
 - (void)willMoveToSuperview:(UIView *)newSuperview {
-    if (newSuperview == nil || self.selectIndex == 0) {
+    if (newSuperview == nil) {
         return;
     }
     dispatch_async(dispatch_get_main_queue(), ^{
         // 当有设置初始菜单下标的时候，等待主队列空闲再执行该方法
         [self selectItemAtIndex:self.selectIndex withAnimation:NO];
+        if (self.selectIndex == 0) {
+            if ([self.delegate respondsToSelector:@selector(menuView:didSelectIndex:)]) {
+                [self.delegate menuView:self didSelectIndex:0];
+            }
+        }
     });
 }
 
@@ -220,13 +230,13 @@
     if (!item) {
         return;
     }
-    self.selectIndex = index;
-    if ([self.delegate respondsToSelector:@selector(menuView:didSelectIndex:)]) {
+    if (index != self.selectIndex && [self.delegate respondsToSelector:@selector(menuView:didSelectIndex:)]) {
         [self.delegate menuView:self didSelectIndex:indexPath.row];
     }
     if (self.decorateView) {
-        [self.decorateView moveToIndex:self.selectIndex withAnimation:animation];
+        [self.decorateView moveToIndex:index withAnimation:animation];
     }
+    self.selectIndex = index;
     [self.menuCollectionView reloadData];
     [self refreshContentOffsetItemFrame:item.frame];
 }
@@ -252,6 +262,9 @@
         self.selectIndex = 0;
     }
     [self selectItemAtIndex:self.selectIndex withAnimation:NO];
+    if ([self.delegate respondsToSelector:@selector(menuView:didSelectIndex:)]) {
+        [self.delegate menuView:self didSelectIndex:self.selectIndex];
+    }
 }
 
 @end

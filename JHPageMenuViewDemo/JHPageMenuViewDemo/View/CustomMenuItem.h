@@ -10,4 +10,6 @@
 
 @interface CustomMenuItem : JHPageMenuItem
 
+@property (weak, nonatomic) IBOutlet UILabel *lbTitle;
+
 @end

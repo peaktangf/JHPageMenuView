@@ -10,7 +10,6 @@
 
 @interface CustomMenuItem ()
 @property (weak, nonatomic) IBOutlet UIView *markView;
-@property (weak, nonatomic) IBOutlet UILabel *lbTitle;
 @end
 
 @implementation CustomMenuItem
@@ -20,13 +19,11 @@
 }
 
 - (void)menuItemNormalStyle {
-    self.lbTitle.text = @"未选中";
     self.lbTitle.textColor = [UIColor grayColor];
     self.markView.backgroundColor = [UIColor grayColor];
 }
 
 - (void)menuItemSelectedStyle {
-    self.lbTitle.text = @"选中";
     self.lbTitle.textColor = [UIColor redColor];
     self.markView.backgroundColor = [UIColor redColor];
 }

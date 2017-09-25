@@ -14,25 +14,30 @@
 
 @interface MenuViewController ()<JHPageMenuViewDelegate, JHPageMenuViewDataSource>
 @property (nonatomic, strong) JHPageMenuView *menuView;
-@property (nonatomic, assign) NSInteger dataCounts;
+@property (nonatomic, strong) NSMutableArray *datas;
 @end
 
 @implementation MenuViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"效果示例";
     [self setupData];
     [self setupView];
 }
 
 - (void)setupData {
-    self.dataCounts = 5;
+    self.datas = [NSMutableArray array];
+    for (int i = 0; i < 20; i ++) {
+        [self.datas addObject:[NSString stringWithFormat:@"标题%i",i + 1]];
+    }
 }
 
 - (void)setupView {
     self.view.backgroundColor = [UIColor whiteColor];
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"刷新" style:UIBarButtonItemStylePlain target:self action:@selector(refreshData)];
-    self.navigationItem.rightBarButtonItem = item;
+    UIBarButtonItem *itemOne = [[UIBarButtonItem alloc] initWithTitle:@"刷新内容" style:UIBarButtonItemStylePlain target:self action:@selector(refreshData)];
+    UIBarButtonItem *itemTwo = [[UIBarButtonItem alloc] initWithTitle:@"切换下标" style:UIBarButtonItemStylePlain target:self action:@selector(switchIndex)];
+    self.navigationItem.rightBarButtonItems = @[itemOne,itemTwo];
     [self.view addSubview:self.menuView];
     if (self.menuScrollDirection == JHPageMenuScrollDirectionHorizontal) {
         [self.menuView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -78,6 +83,7 @@
                 _menuView.decorateSize = CGSizeMake(70, 30);
                 break;
         }
+        //[_menuView selectItemAtIndex:5 withAnimation:YES];
     }
     return _menuView;
 }
@@ -85,23 +91,23 @@
 #pragma mark - JHMenuViewDataSource
 
 - (NSInteger)numbersOfItemsInMenuView:(JHPageMenuView *)menuView {
-    return self.dataCounts;
+    return self.datas.count;
 }
 
 - (JHPageMenuItem *)menuView:(JHPageMenuView *)menuView menuCellForItemAtIndex:(NSInteger)index {
     if (self.isCustomMenu) {
         CustomMenuItem *item = [CustomMenuItem menuView:menuView itemForIndex:index];
+        item.lbTitle.text = self.datas[index];
         return item;
     } else {
         JHPageMenuItem *item = [JHPageMenuItem menuView:menuView itemForIndex:index];
+        item.titleLabel.text = self.datas[index];
         __weak typeof(self)weakSelf = self;
         __weak typeof(item)weakItem = item;
         item.menuItemNormalStyleBlock = ^{
-            weakItem.titleLabel.text = @"未选中";
             weakItem.titleLabel.textColor = weakSelf.decorateStyle == JHPageDecorateStyleFlood ? [UIColor redColor] : [UIColor grayColor];
         };
         item.menuItemSelectedStyleBlock = ^{
-            weakItem.titleLabel.text = @"选中";
             weakItem.titleLabel.textColor = weakSelf.decorateStyle == JHPageDecorateStyleFlood ? [UIColor whiteColor] : [UIColor redColor];
         };
         return item;
@@ -142,8 +148,15 @@
 #pragma mark - action
 
 - (void)refreshData {
-    self.dataCounts = 8 + arc4random() % 10;
+    [self.datas removeAllObjects];
+    for (int i = 0; i < 20; i ++) {
+        [self.datas addObject:[NSString stringWithFormat:@"新标题%i",i + 1]];
+    }
     [self.menuView reloadData];
+}
+
+- (void)switchIndex {
+    [self.menuView selectItemAtIndex:5 withAnimation:YES];
 }
 
 - (void)didReceiveMemoryWarning {

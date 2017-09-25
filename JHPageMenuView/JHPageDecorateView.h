@@ -25,9 +25,9 @@
 - (void)setDecorateItem:(UIView *)decorateItem menuscrollDirection:(JHPageMenuScrollDirection)scrollDirection decorateNumbers:(NSInteger)decorateNumbers decorateSize:(CGSize)decorateSize;
 
 /**
- 装饰器移动到指定位置
+ 装饰器移动到指定下标
 
- @param index 指定位置
+ @param index 指定下标
  @param animation 是否动画执行
  */
 - (void)moveToIndex:(NSInteger)index withAnimation:(BOOL)animation;
