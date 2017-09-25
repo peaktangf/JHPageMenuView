@@ -9,6 +9,9 @@
 #import "JHPageMenuItem.h"
 #import "JHPageMenuView.h"
 
+@interface JHPageMenuItem () 
+@end
+
 @implementation JHPageMenuItem
 
 #pragma mark - init
@@ -73,27 +76,47 @@
 #pragma mark - Overwrite
 
 - (void)menuItemNormalStyle {
-    // 告知item选中时的样式，自定义的菜单需要重写该方法
+    // 告知item未选中时的样式，自定义的菜单需要重写该方法
     if (self.menuItemNormalStyleBlock) {
         self.menuItemNormalStyleBlock();
     }
 }
 
 - (void)menuItemSelectedStyle {
-    // 告知item未选中时的样式，自定义的菜单需要重写该方法
+    // 告知item选中时的样式，自定义的菜单需要重写该方法
     if (self.menuItemSelectedStyleBlock) {
         self.menuItemSelectedStyleBlock();
+    }
+}
+
+- (void)menuItemNormalStyleAnimation {
+    // 告知item 从 选中 - 未选中 时执行的动画，自定义的菜单如果需要执行动画，需要重写该方法
+    if (self.menuItemNormalStyleAnimationBlock) {
+        self.menuItemNormalStyleAnimationBlock();
+    }
+}
+
+- (void)menuItemSelectedStyleAnimation {
+    // 告知item 从 未选中 - 选中 时执行的动画，自定义的菜单如果需要执行动画，需要重写该方法
+    if (self.menuItemSelectedStyleAnimationBlock) {
+        self.menuItemSelectedStyleAnimationBlock();
     }
 }
 
 #pragma mark - Public
 
 - (void)setSelected:(BOOL)selected withAnimation:(BOOL)animation {
-    self.itemSelected = selected;
+    _itemSelected = selected;
     if (selected) {
         [self menuItemSelectedStyle];
+        if (animation) {
+            [self menuItemSelectedStyleAnimation];
+        }
     } else {
         [self menuItemNormalStyle];
+        if (animation) {
+            [self menuItemNormalStyleAnimation];
+        }
     }
 }
 

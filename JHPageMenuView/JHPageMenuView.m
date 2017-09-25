@@ -15,8 +15,12 @@
 
 /** collectionView布局对象 */
 @property (nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
+/** 装饰视图 */
+@property (nonatomic, strong) JHPageDecorateView *decorateView;
 /** 菜单个数 */
 @property (nonatomic, assign) NSInteger menuCount;
+/** 前一次选中的菜单下标 */
+@property (nonatomic, assign) NSInteger beforeSelectIndex;
 /** 当前选中的菜单下标 */
 @property (nonatomic, assign) NSInteger selectIndex;
 
@@ -63,11 +67,6 @@
 - (void)setScrollDirection:(JHPageMenuScrollDirection)scrollDirection {
     _scrollDirection = scrollDirection;
     self.flowLayout.scrollDirection = scrollDirection == JHPageMenuScrollDirectionHorizontal ? UICollectionViewScrollDirectionHorizontal : UICollectionViewScrollDirectionVertical;
-}
-
-- (void)setFrame:(CGRect)frame {
-//    [super setFrame:frame];
-//    if (!self.menuCollectionView) { return; };
 }
 
 #pragma mark - getter
@@ -117,16 +116,20 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     JHPageMenuItem *item = [self.dataSource menuView:self menuCellForItemAtIndex:indexPath.row];
     if (indexPath.row == self.selectIndex) {
-        [item setSelected:YES withAnimation:NO];
+        [item setSelected:YES withAnimation:YES];
     } else {
-        [item setSelected:NO withAnimation:NO];
+        if (indexPath.row == self.beforeSelectIndex) {
+            [item setSelected:NO withAnimation:YES];
+        } else {
+            [item setSelected:NO withAnimation:NO];
+        }
     }
     return item;
 }
 
 #pragma mark - UICollectionViewDelegate
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [self selectItemAtIndex:indexPath.row withAnimation:YES];
 }
 
@@ -182,6 +185,7 @@
 
 // 让选中的item位于中间
 - (void)refreshContentOffsetItemFrame:(CGRect)frame {
+    
     CGSize contentSize = self.menuCollectionView.contentSize;
     if (self.scrollDirection == JHPageMenuScrollDirectionHorizontal) {
         if (contentSize.width <= self.menuCollectionView.frame.size.width) { return; };
@@ -225,19 +229,20 @@
 #pragma mark - Public
 
 - (void)selectItemAtIndex:(NSInteger)index withAnimation:(BOOL)animation {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
-    JHPageMenuItem *item = [self.dataSource menuView:self menuCellForItemAtIndex:indexPath.row];
+    NSIndexPath *selectIndexPath = [NSIndexPath indexPathForItem:index inSection:0];
+    JHPageMenuItem *item = [self.dataSource menuView:self menuCellForItemAtIndex:selectIndexPath.row];
     if (!item) {
         return;
     }
     if (index != self.selectIndex && [self.delegate respondsToSelector:@selector(menuView:didSelectIndex:)]) {
-        [self.delegate menuView:self didSelectIndex:indexPath.row];
+        [self.delegate menuView:self didSelectIndex:selectIndexPath.row];
+        self.beforeSelectIndex = self.selectIndex;
+        self.selectIndex = index;
+        [self.menuCollectionView reloadData];
     }
     if (self.decorateView) {
         [self.decorateView moveToIndex:index withAnimation:animation];
     }
-    self.selectIndex = index;
-    [self.menuCollectionView reloadData];
     [self refreshContentOffsetItemFrame:item.frame];
 }
 
@@ -265,6 +270,7 @@
     if ([self.delegate respondsToSelector:@selector(menuView:didSelectIndex:)]) {
         [self.delegate menuView:self didSelectIndex:self.selectIndex];
     }
+    [self.menuCollectionView reloadData];
 }
 
 @end

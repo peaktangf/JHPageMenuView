@@ -15,13 +15,13 @@
 @interface MenuViewController ()<JHPageMenuViewDelegate, JHPageMenuViewDataSource>
 @property (nonatomic, strong) JHPageMenuView *menuView;
 @property (nonatomic, strong) NSMutableArray *datas;
+@property (nonatomic, assign) BOOL animation;
 @end
 
 @implementation MenuViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"效果示例";
     [self setupData];
     [self setupView];
 }
@@ -37,7 +37,8 @@
     self.view.backgroundColor = [UIColor whiteColor];
     UIBarButtonItem *itemOne = [[UIBarButtonItem alloc] initWithTitle:@"刷新内容" style:UIBarButtonItemStylePlain target:self action:@selector(refreshData)];
     UIBarButtonItem *itemTwo = [[UIBarButtonItem alloc] initWithTitle:@"切换下标" style:UIBarButtonItemStylePlain target:self action:@selector(switchIndex)];
-    self.navigationItem.rightBarButtonItems = @[itemOne,itemTwo];
+    UIBarButtonItem *itemThree = [[UIBarButtonItem alloc] initWithTitle:@"是否动画" style:UIBarButtonItemStylePlain target:self action:@selector(switchAnimation)];
+    self.navigationItem.rightBarButtonItems = @[itemOne,itemTwo,itemThree];
     [self.view addSubview:self.menuView];
     if (self.menuScrollDirection == JHPageMenuScrollDirectionHorizontal) {
         [self.menuView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -104,11 +105,27 @@
         item.titleLabel.text = self.datas[index];
         __weak typeof(self)weakSelf = self;
         __weak typeof(item)weakItem = item;
+        // 样式
         item.menuItemNormalStyleBlock = ^{
             weakItem.titleLabel.textColor = weakSelf.decorateStyle == JHPageDecorateStyleFlood ? [UIColor redColor] : [UIColor grayColor];
         };
         item.menuItemSelectedStyleBlock = ^{
             weakItem.titleLabel.textColor = weakSelf.decorateStyle == JHPageDecorateStyleFlood ? [UIColor whiteColor] : [UIColor redColor];
+        };
+        // 动画
+        item.menuItemNormalStyleAnimationBlock = ^{
+            if (weakSelf.animation) {
+                [UIView animateWithDuration:.3 animations:^{
+                    weakItem.transform = CGAffineTransformMakeScale(0.9, 0.9);
+                }];
+            }
+        };
+        item.menuItemSelectedStyleAnimationBlock = ^{
+            if (self.animation) {
+                [UIView animateWithDuration:.3 animations:^{
+                    weakItem.transform = CGAffineTransformMakeScale(1.1, 1.1);
+                }];
+            }
         };
         return item;
     }    
@@ -157,6 +174,11 @@
 
 - (void)switchIndex {
     [self.menuView selectItemAtIndex:5 withAnimation:YES];
+}
+
+- (void)switchAnimation {
+    self.animation = !self.animation;
+    [self.menuView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {

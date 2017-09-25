@@ -74,6 +74,4 @@ static NSString *MENU_STYLE_IDENTIFIER = @"MenuStyleCell";
 }
 
 
-
-
 @end

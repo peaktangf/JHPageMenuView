@@ -56,21 +56,20 @@
 
 @interface JHPageMenuView : UIView<JHPageMenuViewDelegate>
 
+/** 代理 */
 @property (nonatomic, weak) id<JHPageMenuViewDelegate> delegate;
 @property (nonatomic, weak) id<JHPageMenuViewDataSource> dataSource;
 /** 菜单视图 */
 @property (nonatomic, strong) UICollectionView *menuCollectionView;
-/** 装饰视图 */
-@property (nonatomic, strong) JHPageDecorateView *decorateView;
-/** 菜单滚动方向 */
-@property (nonatomic, assign) JHPageMenuScrollDirection scrollDirection;
 /** 菜单单元格大小 */
 @property (nonatomic, assign) CGSize menuSize;
-/** 内置的装饰器大小 */
+/** 菜单滚动方向，支持垂直和水平两个方向，默认为水平方向 */
+@property (nonatomic, assign) JHPageMenuScrollDirection scrollDirection;
+/** 内置的装饰器大小，不设置的话默认和菜单大小一致 */
 @property (nonatomic, assign) CGSize decorateSize;
-/** 内置的装饰器样式 */
+/** 内置的装饰器样式，默认为JHPageDecorateStyleDefault，当设置了自定义的装饰器时，设置的该属性不会生效 */
 @property (nonatomic, assign) JHPageDecorateStyle decorateStyle;
-/** 内置的装饰器样式的颜色 */
+/** 内置的装饰器样式的颜色，默认为红色 */
 @property (nonatomic, strong) UIColor *decorateColor;
 
 /**

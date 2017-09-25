@@ -29,6 +29,7 @@
 
 - (void)setupView {
     self.view.backgroundColor = [UIColor whiteColor];
+    [self.menuView setFrame:CGRectMake(0, 0, 160, 30)];
     self.navigationItem.titleView = self.menuView;
 }
 
@@ -40,7 +41,8 @@
 
 - (JHPageMenuView *)menuView {
     if (!_menuView) {
-        _menuView = [[JHPageMenuView alloc] initWithFrame:CGRectMake(0, 0, 160, 30)];
+//        _menuView = [[JHPageMenuView alloc] initWithFrame:CGRectMake(0, 0, 160, 30)];
+        _menuView = [[JHPageMenuView alloc] init];
         _menuView.backgroundColor = [UIColor whiteColor];
         _menuView.layer.cornerRadius = 15.0;
         _menuView.layer.borderWidth = 1.0;

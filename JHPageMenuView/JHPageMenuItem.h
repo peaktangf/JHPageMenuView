@@ -16,10 +16,10 @@
 @property (nonatomic, assign, getter=isItemSelected) BOOL itemSelected;
 
 /**
- 设置item是否选中
- 
+ 设置item的选中状态
+
  @param selected 是否选中
- @param animation 是否执行动画
+ @param animation 是否动画执行
  */
 - (void)setSelected:(BOOL)selected withAnimation:(BOOL)animation;
 
@@ -48,5 +48,17 @@
  一般自定义 item 不建议使用这种方式设置样式，可以重写menuItemNormalStyle来自定义样式
  */
 @property (nonatomic, copy) void(^menuItemSelectedStyleBlock)(void);
+
+/**
+ 告知item 从 选中 - 未选中 时执行的动画，可以通过这个block进行设置
+ 一般自定义 item 不建议使用这种方式设置动画，可以重写menuItemNormalStyleAnimation来自定义样式
+ */
+@property (nonatomic, copy) void(^menuItemNormalStyleAnimationBlock)(void);
+
+/** 
+ 告知item 从 未选中 - 选中 时执行的动画，可以通过这个block进行设置 
+ 一般自定义 item 不建议使用这种方式设置动画，可以重写menuItemSelectedStyleAnimation来自定义样式
+ */
+@property (nonatomic, copy) void(^menuItemSelectedStyleAnimationBlock)(void);
 
 @end

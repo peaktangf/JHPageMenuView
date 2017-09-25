@@ -18,6 +18,7 @@
     [super awakeFromNib];
 }
 
+// 样式
 - (void)menuItemNormalStyle {
     self.lbTitle.textColor = [UIColor grayColor];
     self.markView.backgroundColor = [UIColor grayColor];
@@ -26,6 +27,19 @@
 - (void)menuItemSelectedStyle {
     self.lbTitle.textColor = [UIColor redColor];
     self.markView.backgroundColor = [UIColor redColor];
+}
+
+// 动画
+- (void)menuItemNormalStyleAnimation {
+    [UIView animateWithDuration:.3 animations:^{
+        self.transform = CGAffineTransformIdentity;
+    }];
+}
+
+- (void)menuItemSelectedStyleAnimation {
+    [UIView animateWithDuration:.3 animations:^{
+        self.transform = CGAffineTransformMakeScale(1.1, 1.1);
+    }];
 }
 
 @end
