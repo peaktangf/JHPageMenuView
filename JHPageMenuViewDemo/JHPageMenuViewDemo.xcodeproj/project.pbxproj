@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		9414E2AB1F78D82E00C73444 /* NavTabMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9414E2AA1F78D82E00C73444 /* NavTabMenuViewController.m */; };
+		9414E2AF1F79F07500C73444 /* JHPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9414E2AE1F79F07500C73444 /* JHPageController.m */; };
+		9414E2B81F7A39C800C73444 /* PageControllerStyleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9414E2B71F7A39C800C73444 /* PageControllerStyleViewController.m */; };
+		9414E2BB1F7A39D900C73444 /* PageControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9414E2BA1F7A39D900C73444 /* PageControllerViewController.m */; };
 		943D66751F77B3070077B1BD /* CustomMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 943D66741F77B3070077B1BD /* CustomMenuItem.m */; };
 		943D66771F77B3160077B1BD /* CustomMenuItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 943D66761F77B3160077B1BD /* CustomMenuItem.xib */; };
 		94485C9B1F762AC50093AED5 /* JHPageDecorateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94485C9A1F762AC50093AED5 /* JHPageDecorateView.m */; };
@@ -50,6 +53,12 @@
 		804501FE7EFCC6D36CD2F95D /* Pods-JHPageMenuViewDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JHPageMenuViewDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-JHPageMenuViewDemo/Pods-JHPageMenuViewDemo.release.xcconfig"; sourceTree = "<group>"; };
 		9414E2A91F78D82E00C73444 /* NavTabMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavTabMenuViewController.h; sourceTree = "<group>"; };
 		9414E2AA1F78D82E00C73444 /* NavTabMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavTabMenuViewController.m; sourceTree = "<group>"; };
+		9414E2AD1F79F07500C73444 /* JHPageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHPageController.h; sourceTree = "<group>"; };
+		9414E2AE1F79F07500C73444 /* JHPageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHPageController.m; sourceTree = "<group>"; };
+		9414E2B61F7A39C700C73444 /* PageControllerStyleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageControllerStyleViewController.h; sourceTree = "<group>"; };
+		9414E2B71F7A39C800C73444 /* PageControllerStyleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageControllerStyleViewController.m; sourceTree = "<group>"; };
+		9414E2B91F7A39D900C73444 /* PageControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageControllerViewController.h; sourceTree = "<group>"; };
+		9414E2BA1F7A39D900C73444 /* PageControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageControllerViewController.m; sourceTree = "<group>"; };
 		943D66731F77B3070077B1BD /* CustomMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomMenuItem.h; sourceTree = "<group>"; };
 		943D66741F77B3070077B1BD /* CustomMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomMenuItem.m; sourceTree = "<group>"; };
 		943D66761F77B3160077B1BD /* CustomMenuItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomMenuItem.xib; sourceTree = "<group>"; };
@@ -130,6 +139,16 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		9414E2AC1F79F05100C73444 /* JHPageController */ = {
+			isa = PBXGroup;
+			children = (
+				9414E2AD1F79F07500C73444 /* JHPageController.h */,
+				9414E2AE1F79F07500C73444 /* JHPageController.m */,
+			);
+			name = JHPageController;
+			path = ../../JHPageController;
+			sourceTree = "<group>";
+		};
 		94485CB21F7660AF0093AED5 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -154,6 +173,10 @@
 				94485CBD1F7660AF0093AED5 /* MenuViewController.m */,
 				9414E2A91F78D82E00C73444 /* NavTabMenuViewController.h */,
 				9414E2AA1F78D82E00C73444 /* NavTabMenuViewController.m */,
+				9414E2B61F7A39C700C73444 /* PageControllerStyleViewController.h */,
+				9414E2B71F7A39C800C73444 /* PageControllerStyleViewController.m */,
+				9414E2B91F7A39D900C73444 /* PageControllerViewController.h */,
+				9414E2BA1F7A39D900C73444 /* PageControllerViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -183,6 +206,7 @@
 		94E2C1AC1F7356E9007BB183 /* JHPageMenuViewDemo */ = {
 			isa = PBXGroup;
 			children = (
+				9414E2AC1F79F05100C73444 /* JHPageController */,
 				94E2C1E01F7356F2007BB183 /* JHPageMenuView */,
 				94E2C1B01F7356E9007BB183 /* AppDelegate.h */,
 				94E2C1B11F7356E9007BB183 /* AppDelegate.m */,
@@ -433,11 +457,14 @@
 				94E2C1B21F7356E9007BB183 /* AppDelegate.m in Sources */,
 				94485CC61F7660AF0093AED5 /* MenuDirectionViewController.m in Sources */,
 				9414E2AB1F78D82E00C73444 /* NavTabMenuViewController.m in Sources */,
+				9414E2B81F7A39C800C73444 /* PageControllerStyleViewController.m in Sources */,
 				94E2C1E31F73572F007BB183 /* JHPageMenuView.m in Sources */,
 				94485CAE1F7650760093AED5 /* JHPageDecorateBuiltInItem.m in Sources */,
+				9414E2BB1F7A39D900C73444 /* PageControllerViewController.m in Sources */,
 				94E2C1AF1F7356E9007BB183 /* main.m in Sources */,
 				94485CC41F7660AF0093AED5 /* MenuStylesViewController.m in Sources */,
 				943D66751F77B3070077B1BD /* CustomMenuItem.m in Sources */,
+				9414E2AF1F79F07500C73444 /* JHPageController.m in Sources */,
 				94485CC51F7660AF0093AED5 /* MenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

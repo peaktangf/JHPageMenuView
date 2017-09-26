@@ -54,6 +54,8 @@
 }
 
 - (void)initialization {
+    self.menuSize = CGSizeZero;
+    self.decorateSize = CGSizeZero;
     self.decorateStyle = JHPageDecorateStyleDefault;
     self.decorateColor = [UIColor redColor];
     [self addSubview:self.menuCollectionView];
