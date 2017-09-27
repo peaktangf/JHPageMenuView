@@ -9,10 +9,12 @@
 #import "JHPageController.h"
 
 @interface JHPageController ()<JHPageMenuViewDelegate, JHPageMenuViewDataSource, UIPageViewControllerDelegate, UIPageViewControllerDataSource>
-@property (nonatomic, strong) JHPageMenuView *menuView;
 @property (nonatomic, strong) UIPageViewController *pageViewController;
+@property (nonatomic, strong) JHPageMenuView *menuView;
 @property (nonatomic, assign) JHPageMenuLocationStyle menuLocationStyle;
+@property (nonatomic, weak) UIViewController *navBarController;
 @property (nonatomic, assign) NSInteger dataCount;
+@property (nonatomic, assign) BOOL isDragPageContrller;// 是否是拖拽pageController完成的页面切换
 @end
 
 @implementation JHPageController
@@ -23,40 +25,55 @@
 
 #pragma mark - init
 
-- (instancetype)initWithMenuLocationStyle:(JHPageMenuLocationStyle)menulocationStyle {
+- (instancetype)initWithMenuLocationStyle:(JHPageMenuLocationStyle)menulocationStyle navBarController:(UIViewController *)navBarController {
     if (self == [super init]) {
         _menuLocationStyle = menulocationStyle;
+        _navBarController = navBarController;
         [self initialization];
     }
     return self;
 }
 
 - (void)initialization {
-    [self.view addSubview:self.menuView];
-    [self.menuView mas_makeConstraints:^(MASConstraintMaker *make) {
-        switch (self.menuLocationStyle) {
-            case JHPageMenuLocationStyleTop: {
-                make.top.leading.trailing.equalTo(self.view);
-                make.height.mas_equalTo(self.menuView.menuSize.height);
+    [self initializationMenuView];
+    [self initializationPageViewController];
+}
+
+- (void)initializationMenuView {
+    if (self.menuLocationStyle == JHPageMenuLocationStyleNavBar) {
+        self.navBarController.navigationItem.titleView = self.menuView;
+    } else {
+        [self.view addSubview:self.menuView];
+        [self.menuView mas_makeConstraints:^(MASConstraintMaker *make) {
+            switch (self.menuLocationStyle) {
+                case JHPageMenuLocationStyleTop: {
+                    make.top.leading.trailing.equalTo(self.view);
+                    make.height.mas_equalTo(self.menuView.menuSize.height);
+                }
+                    break;
+                case JHPageMenuLocationStyleBottom: {
+                    make.bottom.leading.trailing.equalTo(self.view);
+                    make.height.mas_equalTo(self.menuView.menuSize.height);
+                }
+                    break;
+                case JHPageMenuLocationStyleLeft: {
+                    make.top.leading.bottom.equalTo(self.view);
+                    make.width.mas_equalTo(self.menuView.menuSize.width);
+                }
+                    break;
+                case JHPageMenuLocationStyleRight: {
+                    make.top.bottom.trailing.equalTo(self.view);
+                    make.width.mas_equalTo(self.menuView.menuSize.width);
+                }
+                    break;
+                case JHPageMenuLocationStyleNavBar:
+                    break;
             }
-                break;
-            case JHPageMenuLocationStyleBottom: {
-                make.bottom.leading.trailing.equalTo(self.view);
-                make.height.mas_equalTo(self.menuView.menuSize.height);
-            }
-                break;
-            case JHPageMenuLocationStyleLeft: {
-                make.top.leading.bottom.equalTo(self.view);
-                make.width.mas_equalTo(self.menuView.menuSize.width);
-            }
-                break;
-            case JHPageMenuLocationStyleRight: {
-                make.top.bottom.trailing.equalTo(self.view);
-                make.width.mas_equalTo(self.menuView.menuSize.width);
-            }
-                break;
-        }
-    }];
+        }];
+    }
+}
+
+- (void)initializationPageViewController {
     [self.view addSubview:self.pageViewController.view];
     [self.pageViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
         switch (self.menuLocationStyle) {
@@ -80,37 +97,41 @@
                 make.trailing.equalTo(self.menuView.mas_leading);
             }
                 break;
+            case JHPageMenuLocationStyleNavBar: {
+                make.top.leading.trailing.bottom.equalTo(self.view);
+            }
+                break;
         }
     }];
 }
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
-    NSAssert(self.dataCount > 0, @"Must have one childViewCpntroller at least");
-    // 设置初始菜单
-    [self.menuView mas_updateConstraints:^(MASConstraintMaker *make) {
-        switch (self.menuLocationStyle) {
-            case JHPageMenuLocationStyleTop: {
-                make.height.mas_equalTo(self.menuView.menuSize.height);
+    // 菜单视图布局
+    if (self.menuLocationStyle != JHPageMenuLocationStyleNavBar) {
+        [self.menuView mas_updateConstraints:^(MASConstraintMaker *make) {
+            switch (self.menuLocationStyle) {
+                case JHPageMenuLocationStyleTop: {
+                    make.height.mas_equalTo(self.menuView.menuSize.height);
+                }
+                    break;
+                case JHPageMenuLocationStyleBottom: {
+                    make.height.mas_equalTo(self.menuView.menuSize.height);
+                }
+                    break;
+                case JHPageMenuLocationStyleLeft: {
+                    make.width.mas_equalTo(self.menuView.menuSize.width);
+                }
+                    break;
+                case JHPageMenuLocationStyleRight: {
+                    make.width.mas_equalTo(self.menuView.menuSize.width);
+                }
+                    break;
+                case JHPageMenuLocationStyleNavBar:
+                    break;
             }
-                break;
-            case JHPageMenuLocationStyleBottom: {
-                make.height.mas_equalTo(self.menuView.menuSize.height);
-            }
-                break;
-            case JHPageMenuLocationStyleLeft: {
-                make.width.mas_equalTo(self.menuView.menuSize.width);
-            }
-                break;
-            case JHPageMenuLocationStyleRight: {
-                make.width.mas_equalTo(self.menuView.menuSize.width);
-            }
-                break;
-        }
-    }];
-    // 设置初始控制器
-    UIViewController *vc = [self.dataSource pageController:self viewContrlllerAtIndex:self.selectIndex];
-    [self.pageViewController setViewControllers:@[vc] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+        }];
+    }
 }
 
 #pragma mark - setter
@@ -119,6 +140,7 @@
     UIPageViewControllerNavigationDirection direction = selectIndex > self.selectIndex ? UIPageViewControllerNavigationDirectionForward : UIPageViewControllerNavigationDirectionReverse;
     _selectIndex = selectIndex;
     if (self.dataCount == 0) { return; }
+    NSAssert(self.selectIndex <= (self.dataCount - 1), @"选中的下标超出了范围");
     [self.menuView selectItemAtIndex:selectIndex withAnimation:YES];
     UIViewController *vc = [self.dataSource pageController:self viewContrlllerAtIndex:selectIndex];
     [self.pageViewController setViewControllers:@[vc] direction:direction animated:YES completion:nil];
@@ -129,9 +151,9 @@
     self.menuView.backgroundColor = menuBackgroundColor;
 }
 
-- (void)setMenuSize:(CGSize)menuSize {
-    _menuSize = menuSize;
-    self.menuView.menuSize = menuSize;
+- (void)setMenuItemSize:(CGSize)menuItemSize {
+    _menuItemSize = menuItemSize;
+    self.menuView.menuSize = menuItemSize;
     if (self.dataCount == 0) { return; }
     [self.menuView mas_updateConstraints:^(MASConstraintMaker *make) {
         switch (self.menuLocationStyle) {
@@ -151,30 +173,47 @@
                 make.width.mas_equalTo(self.menuView.menuSize.width);
             }
                 break;
+            case JHPageMenuLocationStyleNavBar: {
+                
+            }
+                break;
         }
     }];
-    [self.menuView reloadData];
 }
 
 - (void)setDecorateSize:(CGSize)decorateSize {
     _decorateSize = decorateSize;
     self.menuView.decorateSize = decorateSize;
-    if (self.dataCount == 0) { return; }
-    [self.menuView reloadData];
 }
 
 - (void)setDecorateStyle:(JHPageDecorateStyle)decorateStyle {
     _decorateStyle = decorateStyle;
     self.menuView.decorateStyle = decorateStyle;
-    if (self.dataCount == 0) { return; }
-    [self.menuView reloadData];
 }
 
 - (void)setDecorateColor:(UIColor *)decorateColor {
     _decorateColor = decorateColor;
     self.menuView.decorateColor = decorateColor;
-    if (self.dataCount == 0) { return; }
-    [self.menuView reloadData];
+}
+
+- (void)setMenuSize:(CGSize)menuSize {
+    _menuSize = menuSize;
+    self.menuView.frame = CGRectMake(0, 0, menuSize.width, menuSize.height);
+}
+
+- (void)setMenuBorderWidth:(CGFloat)menuBorderWidth {
+    _menuBorderWidth = menuBorderWidth;
+    self.menuView.layer.borderWidth = menuBorderWidth;
+}
+
+- (void)setMenuBorderColor:(UIColor *)menuBorderColor {
+    _menuBorderColor = menuBorderColor;
+    self.menuView.layer.borderColor = menuBorderColor.CGColor;
+}
+
+- (void)setMenuCornerRadius:(CGFloat)menuCornerRadius {
+    _menuCornerRadius = menuCornerRadius;
+    self.menuView.layer.cornerRadius = menuCornerRadius;
 }
 
 #pragma mark - getter
@@ -183,7 +222,7 @@
     if (!_menuView) {
         _menuView = [[JHPageMenuView alloc] init];
         _menuView.backgroundColor = [UIColor groupTableViewBackgroundColor];
-        _menuView.scrollDirection = (self.menuLocationStyle == JHPageMenuLocationStyleTop || self.menuLocationStyle == JHPageMenuLocationStyleBottom) ? JHPageMenuScrollDirectionHorizontal : JHPageMenuScrollDirectionVertical;
+        _menuView.scrollDirection = (self.menuLocationStyle == JHPageMenuLocationStyleTop || self.menuLocationStyle == JHPageMenuLocationStyleBottom || self.menuLocationStyle == JHPageMenuLocationStyleNavBar) ? JHPageMenuScrollDirectionHorizontal : JHPageMenuScrollDirectionVertical;
         _menuView.delegate = self;
         _menuView.dataSource = self;
     }
@@ -192,7 +231,7 @@
 
 - (UIPageViewController *)pageViewController {
     if (!_pageViewController) {
-        _pageViewController = [[UIPageViewController alloc]initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:(self.menuLocationStyle == JHPageMenuLocationStyleTop || self.menuLocationStyle == JHPageMenuLocationStyleBottom) ? UIPageViewControllerNavigationOrientationHorizontal : UIPageViewControllerNavigationOrientationVertical options:nil];
+        _pageViewController = [[UIPageViewController alloc]initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:(self.menuLocationStyle == JHPageMenuLocationStyleTop || self.menuLocationStyle == JHPageMenuLocationStyleBottom || self.menuLocationStyle == JHPageMenuLocationStyleNavBar) ? UIPageViewControllerNavigationOrientationHorizontal : UIPageViewControllerNavigationOrientationVertical options:nil];
         _pageViewController.delegate = self;
         _pageViewController.dataSource = self;
         [self addChildViewController:_pageViewController];
@@ -222,20 +261,29 @@
 }
 
 - (void)menuView:(JHPageMenuView *)menuView didSelectIndex:(NSInteger)index {
-    __weak typeof(self)weakSelf = self;
-    UIViewController *vc = [self.dataSource pageController:self viewContrlllerAtIndex:index];
-    NSInteger beforeSelectIndex = self.selectIndex;
-    _selectIndex = index;
-    [self willEnterViewController];
-    if (self.selectIndex > beforeSelectIndex) {
-        [self.pageViewController setViewControllers:@[vc] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:^(BOOL finished) {
-            [weakSelf didEnterViewController];
-        }];
-    } else {
-        [self.pageViewController setViewControllers:@[vc] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:^(BOOL finished) {
-            [weakSelf didEnterViewController];
-        }];
+    if (!self.isDragPageContrller) {
+        __weak typeof(self)weakSelf = self;
+        UIViewController *vc = [self.dataSource pageController:self viewContrlllerAtIndex:index];
+        if (vc == nil) { return; }
+        
+        NSInteger beforeSelectIndex = self.selectIndex;
+        _selectIndex = index;
+        [self willEnterViewController];
+        if (self.selectIndex == 0 && self.selectIndex == beforeSelectIndex) {
+            [self.pageViewController setViewControllers:@[vc] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:^(BOOL finished) {
+                [weakSelf didEnterViewController];
+            }];
+        } else if (self.selectIndex > beforeSelectIndex) {
+            [self.pageViewController setViewControllers:@[vc] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:^(BOOL finished) {
+                [weakSelf didEnterViewController];
+            }];
+        } else {
+            [self.pageViewController setViewControllers:@[vc] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:^(BOOL finished) {
+                [weakSelf didEnterViewController];
+            }];
+        }
     }
+    self.isDragPageContrller = NO;
 }
 
 #pragma mark - pageView dataSource & delagate
@@ -267,7 +315,7 @@
 
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray<UIViewController *> *)previousViewControllers transitionCompleted:(BOOL)completed {
     if (completed && finished) {
-        // 完成 页面 的转变
+        self.isDragPageContrller = YES;
         [self.menuView selectItemAtIndex:self.selectIndex withAnimation:YES];
         [self didEnterViewController];
     }

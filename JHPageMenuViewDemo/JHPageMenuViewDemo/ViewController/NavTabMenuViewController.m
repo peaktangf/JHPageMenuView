@@ -41,7 +41,6 @@
 
 - (JHPageMenuView *)menuView {
     if (!_menuView) {
-//        _menuView = [[JHPageMenuView alloc] initWithFrame:CGRectMake(0, 0, 160, 30)];
         _menuView = [[JHPageMenuView alloc] init];
         _menuView.backgroundColor = [UIColor whiteColor];
         _menuView.layer.cornerRadius = 15.0;

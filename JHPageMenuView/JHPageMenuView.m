@@ -54,6 +54,7 @@
 }
 
 - (void)initialization {
+    self.selectIndex = -1;
     self.menuSize = CGSizeZero;
     self.decorateSize = CGSizeZero;
     self.decorateStyle = JHPageDecorateStyleDefault;
@@ -175,14 +176,19 @@
         return;
     }
     dispatch_async(dispatch_get_main_queue(), ^{
-        // 当有设置初始菜单下标的时候，等待主队列空闲再执行该方法
         [self selectItemAtIndex:self.selectIndex withAnimation:NO];
-        if (self.selectIndex == 0) {
-            if ([self.delegate respondsToSelector:@selector(menuView:didSelectIndex:)]) {
-                [self.delegate menuView:self didSelectIndex:0];
-            }
-        }
     });
+//    
+//    //[self selectItemAtIndex:self.selectIndex withAnimation:NO];
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        // 当有设置初始菜单下标的时候，等待主队列空闲再执行该方法
+//        
+////        if (self.selectIndex == 0) {
+////            if ([self.delegate respondsToSelector:@selector(menuView:didSelectIndex:)]) {
+////                [self.delegate menuView:self didSelectIndex:0];
+////            }
+////        }
+//    });
 }
 
 // 让选中的item位于中间
@@ -190,7 +196,8 @@
     
     CGSize contentSize = self.menuCollectionView.contentSize;
     if (self.scrollDirection == JHPageMenuScrollDirectionHorizontal) {
-        if (contentSize.width <= self.menuCollectionView.frame.size.width) { return; };
+        if (contentSize.width <= self.menuCollectionView.frame.size.width) { return; }
+        
         CGFloat itemX = frame.origin.x;
         CGFloat itemWith = self.menuCollectionView.frame.size.width;
         if (itemX > itemWith/2) {
@@ -208,7 +215,8 @@
             [self.menuCollectionView setContentOffset:CGPointMake(0, 0) animated:YES];
         }
     } else {
-        if (contentSize.height <= self.menuCollectionView.frame.size.height) { return; };
+        if (contentSize.height <= self.menuCollectionView.frame.size.height) { return; }
+        
         CGFloat itemY = frame.origin.y;
         CGFloat itemHeight = self.menuCollectionView.frame.size.height;
         if (itemY > itemHeight/2) {
@@ -231,14 +239,18 @@
 #pragma mark - Public
 
 - (void)selectItemAtIndex:(NSInteger)index withAnimation:(BOOL)animation {
+    
+    if (index == -1) {
+        index = 0;
+    }
+    
     NSIndexPath *selectIndexPath = [NSIndexPath indexPathForItem:index inSection:0];
     JHPageMenuItem *item = [self.dataSource menuView:self menuCellForItemAtIndex:selectIndexPath.row];
-    if (!item) {
-        return;
-    }
+    if (!item) { return; }
+    
     if (index != self.selectIndex && [self.delegate respondsToSelector:@selector(menuView:didSelectIndex:)]) {
         [self.delegate menuView:self didSelectIndex:selectIndexPath.row];
-        self.beforeSelectIndex = self.selectIndex;
+        self.beforeSelectIndex = self.selectIndex == -1 ? 0 : self.selectIndex;
         self.selectIndex = index;
         [self.menuCollectionView reloadData];
     }

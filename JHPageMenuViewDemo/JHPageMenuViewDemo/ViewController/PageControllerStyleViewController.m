@@ -28,7 +28,8 @@ static NSString *PAGECONTROLLER_STYLE_IDENTIFIER = @"PageControllerStyleCell";
     self.datas = @[@{@"name":@"JHPageMenuLocationStyleTop", @"style":@(JHPageMenuLocationStyleTop)},
                    @{@"name":@"JHPageMenuLocationStyleLeft", @"style":@(JHPageMenuLocationStyleLeft)},
                    @{@"name":@"JHPageMenuLocationStyleBottom", @"style":@(JHPageMenuLocationStyleBottom)},
-                   @{@"name":@"JHPageMenuLocationStyleRight", @"style":@(JHPageMenuLocationStyleRight)}];
+                   @{@"name":@"JHPageMenuLocationStyleRight", @"style":@(JHPageMenuLocationStyleRight)},
+                   @{@"name":@"JHPageMenuLocationStyleNavBar", @"style":@(JHPageMenuLocationStyleNavBar)}];
 }
 
 - (void)setupView {

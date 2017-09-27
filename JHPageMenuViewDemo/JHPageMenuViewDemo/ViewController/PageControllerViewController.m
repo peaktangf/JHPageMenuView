@@ -54,13 +54,23 @@
 
 - (JHPageController *)pageController {
     if (!_pageController) {
-        _pageController = [[JHPageController alloc] initWithMenuLocationStyle:self.menuLocationStyle];
-        _pageController.decorateStyle = JHPageDecorateStyleLine;
-        _pageController.menuSize = CGSizeMake(80, 50);
-        _pageController.decorateSize = (self.menuLocationStyle == JHPageMenuLocationStyleTop || self.menuLocationStyle == JHPageMenuLocationStyleBottom) ? CGSizeMake(40, 2) : CGSizeMake(2, 40);
+        _pageController = [[JHPageController alloc] initWithMenuLocationStyle:self.menuLocationStyle navBarController:self];
+        _pageController.menuItemSize = self.menuLocationStyle == JHPageMenuLocationStyleNavBar ? CGSizeMake(80, 30) : CGSizeMake(80, 50);
         _pageController.delegate = self;
         _pageController.dataSource = self;
-        _pageController.selectIndex = 5;
+        if (self.menuLocationStyle == JHPageMenuLocationStyleNavBar) {
+            _pageController.decorateStyle = JHPageDecorateStyleFlood;
+            // 设置菜单视图本身的样式
+            _pageController.menuBackgroundColor = [UIColor whiteColor];
+            _pageController.menuSize = CGSizeMake(160, 30);
+            _pageController.menuCornerRadius = 15.0;
+            _pageController.menuBorderWidth = 1.0;
+            _pageController.menuBorderColor = [UIColor redColor];
+        } else {
+            _pageController.decorateStyle = JHPageDecorateStyleLine;
+            _pageController.decorateSize = (self.menuLocationStyle == JHPageMenuLocationStyleTop || self.menuLocationStyle == JHPageMenuLocationStyleBottom || self.menuLocationStyle == JHPageMenuLocationStyleNavBar ) ? CGSizeMake(40, 2) : CGSizeMake(2, 40);
+            _pageController.selectIndex = 5;
+        }
     }
     return _pageController;
 }
@@ -68,7 +78,7 @@
 #pragma mark - JHPageControllerDataSource
 
 - (NSInteger)numbersOfViewControllerInPageController:(JHPageController *)pageController {
-    return self.childControllers.count;
+    return self.menuLocationStyle == JHPageMenuLocationStyleNavBar ? 2 : self.childControllers.count;
 }
 
 - (NSInteger)indexOfViewController:(UIViewController *)viewController {
@@ -83,12 +93,21 @@
     JHPageMenuItem *item = [JHPageMenuItem menuView:menuView itemForIndex:index];
     item.titleLabel.text = self.menus[index];
     __weak typeof(item)weakItem = item;
+    __weak typeof(self)weakSelf = self;
     // 样式
     item.menuItemNormalStyleBlock = ^{
-        weakItem.titleLabel.textColor = [UIColor grayColor];
+        if (weakSelf.menuLocationStyle == JHPageMenuLocationStyleNavBar) {
+            weakItem.titleLabel.textColor = [UIColor redColor];
+        } else {
+            weakItem.titleLabel.textColor = [UIColor grayColor];
+        }
     };
     item.menuItemSelectedStyleBlock = ^{
-        weakItem.titleLabel.textColor = [UIColor redColor];
+        if (weakSelf.menuLocationStyle == JHPageMenuLocationStyleNavBar) {
+            weakItem.titleLabel.textColor = [UIColor whiteColor];
+        } else {
+            weakItem.titleLabel.textColor = [UIColor redColor];
+        }
     };
     return item;
 }
@@ -96,17 +115,17 @@
 #pragma mark - JHPageControllerDelegate
 
 - (void)pageController:(JHPageController *)pageController willEnterViewControllerAtIndex:(NSInteger)index {
-    NSLog(@"将要进入第 %ld 个控制器",index);
+    NSLog(@"将要进入第 %ld 个控制器",index + 1);
 }
 
 - (void)pageController:(JHPageController *)pageController didEnterViewControllerAtIndex:(NSInteger)index {
-    NSLog(@"已经进入第 %ld 个控制器",index);
+    NSLog(@"已经进入第 %ld 个控制器",index + 1);
 }
 
 #pragma mark - action
 
 - (void)switchIndex {
-    self.pageController.selectIndex = 2;
+    self.pageController.selectIndex = 1;
 }
 
 @end
