@@ -97,8 +97,10 @@ typedef NS_ENUM(NSInteger, JHPageMenuLocationStyle) {
 /** 代理 */
 @property (nonatomic, weak) id<JHPageControllerDataSource> dataSource;
 @property (nonatomic, weak) id<JHPageControllerDelegate> delegate;
+
 /** 设置当前选中的下标 */
 @property (nonatomic, assign) NSInteger selectIndex;
+
 /** 菜单Item大小，默认为CGRectZero，所以一定要设置 */
 @property (nonatomic, assign) CGSize menuItemSize;
 /** 内置的装饰器大小，不设置的话默认和菜单大小一致 */

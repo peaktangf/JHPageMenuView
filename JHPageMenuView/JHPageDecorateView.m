@@ -31,7 +31,7 @@
 /** 装饰器需要移动的距离绝对值（差距） */
 @property (nonatomic, assign) CGFloat gap;
 /** 装饰器每一步需要移动的距离（步伐） */
-@property (nonatomic, assign) CGFloat setp;
+@property (nonatomic, assign) CGFloat step;
 /** 装饰器移动的方向： 1代表正方向，-1代表反方向 */
 @property (nonatomic, assign) int sign;
 
@@ -119,7 +119,7 @@
     } else {
         self.gap = (self.scrollDirection == JHPageMenuScrollDirectionHorizontal ? self.decorateSize.width : self.decorateSize.height) * labs(index -  self.selectIndex);
         self.sign = self.selectIndex > index ? -1 : 1;
-        self.setp = animation ? self.gap / 10 : self.gap;
+        self.step = animation ? self.gap / 15 : self.gap;
         self.selectIndex = index;
         if (self.displayLink) {
             [self.displayLink invalidate];
@@ -134,15 +134,15 @@
 #pragma mark - private
 
 - (void)progressChanged {
-    if (self.gap > 0) {
-        self.gap -= self.setp;
-        if (self.gap < 0) {
-            [self moveToPosition:self.position + self.sign * self.gap];
+    if (self.gap > 0.00001) {
+        self.gap -= self.step;
+        if (self.gap < 0.0) {
+            [self moveToPosition:self.position + self.sign * self.step];
             return;
         }
-        [self moveToPosition:self.position + self.sign * self.setp];
+        [self moveToPosition:self.position + self.sign * self.step];
     } else {
-        [self moveToPosition:self.position + self.sign * self.gap];
+        [self moveToPosition:self.position];
         [self.displayLink invalidate];
         self.displayLink = nil;
     }

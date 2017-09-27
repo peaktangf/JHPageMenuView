@@ -62,7 +62,7 @@
         _menuView.delegate = self;
         _menuView.dataSource = self;
         _menuView.scrollDirection = self.menuScrollDirection;
-        _menuView.menuSize = self.isCustomMenu ? CGSizeMake(100, 100) : CGSizeMake(80, 50);
+        _menuView.menuSize = self.isCustomMenu ? CGSizeMake(100, 100) : CGSizeMake(80.135, 50);
         switch (self.decorateStyle) {
             case JHPageDecorateStyleDefault:
                 break;
@@ -84,7 +84,6 @@
                 _menuView.decorateSize = CGSizeMake(70, 30);
                 break;
         }
-        //[_menuView selectItemAtIndex:5 withAnimation:YES];
     }
     return _menuView;
 }
