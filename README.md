@@ -11,17 +11,6 @@
 
 ![天猫国际页.gif](http://upload-images.jianshu.io/upload_images/1248713-1e7e5d083f9f9950.gif?imageMogr2/auto-orient/strip)
 
-- 猪猪快购
-
-![猪猪快购分类页.gif](http://upload-images.jianshu.io/upload_images/1248713-cac383d57dfde398.gif?imageMogr2/auto-orient/strip)
-
-- 猪猪海外
-
-![猪猪海外分类页.gif](http://upload-images.jianshu.io/upload_images/1248713-9687f1c7ed745c5a.gif?imageMogr2/auto-orient/strip)
-
-- 几何金融
-
-![几何金融投资记录页.gif](http://upload-images.jianshu.io/upload_images/1248713-db29cceb23c05e2e.gif?imageMogr2/auto-orient/strip)
 
 ##### 2、```JHPageMenuView```拽写的初衷
 - 已有的开源组件有哪些？
